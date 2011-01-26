@@ -1,0 +1,24 @@
+[19.01.2011 15:19] Error in Query|1054|Unknown column 'activationDate' in 'field list'
+[20.01.2011 19:04] Error in Query|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SEC ) < NOW() ) THEN 0 ELSE 1 END							FROM								fw_chatactivities as act				' at line 4
+[20.01.2011 19:04] Error in Query|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SEC ) < NOW() ) THEN 0 ELSE 1 END							FROM								fw_chatactivities as act				' at line 4
+[20.01.2011 19:05] Error in Query|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SECONDS ) < NOW() ) THEN 0 ELSE 1 END							FROM								fw_chatactivities as act' at line 4
+[20.01.2011 19:06] Error in Query|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SECONDS  < NOW()  THEN 0 ELSE 1 END							FROM								fw_chatactivities as act		' at line 4
+[20.01.2011 19:06] Error in Query|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SECONDS  < NOW()  THEN 0 ELSE 1 END							FROM								fw_chatactivities as act		' at line 4
+[20.01.2011 19:06] Error in Query|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SECONDS  < NOW()  THEN 0 ELSE 1 END							FROM								fw_chatactivities as act		' at line 4
+[20.01.2011 19:06] Error in Query|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SECONDS  < NOW()  THEN 0 ELSE 1 END							FROM								fw_chatactivities as act		' at line 4
+[20.01.2011 19:08] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:09] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:10] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:13] Error in Query|1054|Unknown column 'lastActivity' in 'where clause'
+[20.01.2011 19:14] Error in Query|1054|Unknown column 'lastActivity' in 'field list'
+[20.01.2011 19:14] Error in Query|1054|Unknown column 'lastActivity' in 'where clause'
+[20.01.2011 19:14] Error in Query|1054|Unknown column 'lastActivity' in 'where clause'

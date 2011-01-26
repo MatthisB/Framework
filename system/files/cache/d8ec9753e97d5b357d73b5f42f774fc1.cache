@@ -1,0 +1,11 @@
+<form name="loginForm" action="http://localhost/eclipse_workspace/Framework/login" method="post" enctype="application/x-www-form-urlencoded">
+	<input type="text" name="name" value="Name" />
+	<br />
+	<input type="password" name="pass" value="Pass" />
+	<br  />
+	<input type="submit" name="submit" value="GO" class="button" />
+	<input type="button" name="register" value="Registrieren" onClick="window.location='http://localhost/eclipse_workspace/Framework/login/registrieren/'" />
+	
+	<br />
+	<input type="button" name="vergessen" value="Passwort vergessen" onClick="window.location='http://localhost/eclipse_workspace/Framework/login/pw_vergessen/'" />
+</form>

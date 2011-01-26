@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- {if $weiterleitung}<meta http-equiv="refresh" content="{weiterleitung_time}; URL={weiterleitung_seite}" />{/if $weiterleitung} -->
+<title>LOGIN / LOGOUT</title>
+{JS templates/basicFunctions.js}
+{JS templates/basicClasses.js}
+{CSS templates/basicStyles.css}
+<style type="text/css">
+<!--
+body
+{
+	font-size:			10px;
+	font-family:		Verdana, Arial, Helvetica, sans-serif;
+	color:				#000000;
+	background-color:	#EFEFEF;
+	margin:				0px;
+	padding:			0px;
+}
+
+form label
+{
+	vertical-align:		top;
+	width:				100px;
+	float:				left;
+	margin:				2px;
+}
+
+input,
+textarea,
+select,
+options
+{
+	font-size:			10px;
+	font-family:		Verdana, Arial, Helvetica, sans-serif;
+}
+-->
+</style>
+</head>
+<body>
+<div style="height: 300px; position: absolute; top: 50%; margin-top: -150px; width: 450px; left: 50%; margin-left: -225px;">
+	<div style="border: 1px solid #E9E9E9; background: #FFFFFF; padding: 10px;">
+		{$message} <br />
+		{IF $form}
+			<form name="loginForm" action="{_SITEPATH_}login/" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded">
+				<label for="loginName">Name:</label>
+					<input type="text" name="loginName" size="25" value="" />
+					<br />
+				<label for="loginPass">Passwort:</label>
+					<input type="password" name="loginPass" size="25" value="" />
+					<br />
+				<br />
+				<label>&nbsp;</label>
+					<input type="submit" name="loginSubmit" value="Login" />
+			</form>
+		{/IF $form}
+	</div>
+</div>
+</body>
+</html>

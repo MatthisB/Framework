@@ -1,0 +1,79 @@
+/**
+  * AjaxChat Styles
+  */
+
+.ajaxChat_Wrapper
+{
+	position:			fixed;
+	width:				251px;
+	bottom:				0px;
+	right:				5px;
+}
+	
+.ajaxChat_Wrapper .ajaxChat_Tab
+{
+	position:			relative;
+	width:				100%;
+	height:				25px;
+	border:				1px solid #AAA;
+	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background.png');
+	cursor:				pointer;
+	font-weight:		bold;
+	padding:			0px 0px 0px 15px;
+}
+.ajaxChat_Wrapper .ajaxChat_Tab:hover
+{
+	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background_hover.png');
+}
+
+.ajaxChat_Wrapper .ajaxChat_ChatWindow
+{
+	position:			relative;
+	border:				1px solid #BBB;
+	border-top:			0px;
+	background:			#FFF;
+}
+
+.ajaxChat_Wrapper .ajaxChat_inputField
+{
+	border:				0px;
+	border-top:			1px solid #BBB;
+	width:				225px;
+	height:				20px;
+	padding:			0px 5px 0px 20px;
+	
+	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/text_signature.png');
+	background-position:0px 50%;
+}
+
+.ajaxChat_Wrapper .ajaxChat_ChatContent
+{
+	padding:			5px 5px 0px 5px;
+	height:				250px;
+	overflow:			auto;
+}
+
+.ajaxChat_Wrapper .ajaxChat_UserList
+{
+	padding:			0px;
+	margin:				0px;
+	width:				250px;
+	height:				50px;
+	overflow:			auto;
+}
+.ajaxChat_Wrapper .ajaxChat_UserList .ajaxChat_UserList_activeUser
+{
+	padding:			2px 0px 0px 20px;
+	height:				16px;
+	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_green.png');
+}
+.ajaxChat_Wrapper .ajaxChat_UserList .ajaxChat_UserList_inactiveUser
+{
+	padding:			2px 0px 0px 20px;
+	height:				14px;
+	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_black.png');
+}
+.ajaxChat_Wrapper .ajaxChat_UserList .ajaxChat_UserList_grayBG
+{
+	background:			#CCC;
+}

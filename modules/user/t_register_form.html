@@ -1,0 +1,23 @@
+<form name="loginForm" action="{_CURRENTSITE_}" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded">
+	<label for="user_nick">Nickname:</label>
+		<input type="text" name="user[nick]" id="user_nick" value="{$nick}" />
+		<br />
+	
+	<label for="user_email">E-Mail:</label>
+		<input type="text" name="user[email]" id="user_email" value="{$email}" />
+		<br />
+
+	<label for="password__1">Password:</label>
+		<input type="password" name="password[_1]" id="password__1" value="" />
+		<br />
+	<label for="password__2">Repeat Password:</label>
+		<input type="password" name="password[_2]" id="password__2" value="" />
+		<br />
+		
+	<label for="captchaValue">Captcha:</label>
+		<input type="text" name="captchaValue" id="captchaValue" value="" />
+		<br />
+	
+	{CAPTCHA Math 140 80}
+	<input type="submit" name="submit" value="Submit !" />
+</form>

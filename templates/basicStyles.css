@@ -1,0 +1,185 @@
+/**
+  *
+  */
+.asc
+{
+	height:				16px;
+	padding:			2px 0 0 16px;
+	background:			url(http://localhost/eclipse_workspace/Framework/templates/images/bullet_arrow_down.png) no-repeat;
+}
+.desc
+{
+	height:				16px;
+	padding:			2px 0 0 15px;
+	background:			url(http://localhost/eclipse_workspace/Framework/templates/images/bullet_arrow_up.png) no-repeat;
+}
+
+/**
+  * \Helper\Message Styles
+  */
+.MessageError
+{
+	background:			#fbe3e4;
+	border:				1px solid #fbc2c4;
+	color:				#d12f19;
+	padding:			5px;
+}
+
+.MessageSuccess
+{
+	background:			#E6EFC2;
+	border:				1px solid #C6D880;
+	color:				#529214;
+	padding:			5px;
+}
+
+.MessageNotice
+{
+	color:				#EAAF00;
+	background:			#FFF9BD;
+	border:				1px solid #FFC20E;
+	padding:			5px;
+	margin:				5px 0px 5px 0px;
+}
+
+/**
+  * mySQL Error Message
+  */
+#mySQL_Error
+{
+	position:			absolute;
+	width:				100%;
+	height:				100%;
+	left:				0px;
+	top:				0px;
+	padding:			0px;
+	margin:				0px;
+	z-index:			100;
+	background:			#FFFFFF;
+}
+
+#mySQL_Error h2
+{
+	display:			block;
+}
+
+/**
+  * Ajax LoaderImage
+  */
+.AjaxLoader
+{	
+	position:			fixed;
+	top:				10px;
+	right:				10px;
+	z-index:			10;
+	display:			none;
+	
+	width:				43px;
+	height:				11px;
+	background:			url(http://localhost/eclipse_workspace/Framework/templates/ajax-loader.gif) no-repeat;
+}
+  
+  
+/**
+  * JS - RatingStars
+  */
+.Rating_Wrapper
+{
+	margin:				0px;
+	padding:			0px;
+}
+.Rating_Status
+{
+	margin:				0px;
+	padding:			0px;
+	display:			block;	
+}
+.Rating_CurrentResult
+{
+	display:			none;
+}
+
+.Rating_Wrapper img
+{
+	cursor:				pointer;
+}
+.Rating_Wrapper_Rated img
+{
+	cursor:				default;
+}
+
+
+/**
+  * Captcha
+  */
+.Captcha img
+{
+	position:			absolute;
+	z-index:			1;
+}
+.Captcha a
+{
+	position:			absolute;
+	z-index:			2;
+	margin:				5px;
+}
+.Captcha a img
+{
+	position:			relative;
+}
+
+
+/**
+  * Form Elements
+  */
+form .formError
+{
+	background:			#fbe3e4;
+	border:				1px solid #fbc2c4;
+	color:				#d12f19;
+}
+  
+  
+/**
+  * BBCode Elements
+  */
+.BBCode_pre {}
+.BBCode_url {}
+.BBCode_email {}
+.BBCode_quote 
+{
+	border:				1px solid #CCC;
+}
+
+.BBCode_toggle_link {}
+.BBCode_toggle_content {}
+
+.BBCode_php
+{
+	border:				1px solid #CCC;	
+}
+.BBCode_code
+{
+	border:				1px solid #CCC;	
+}
+.BBCode_table
+{
+	border-top:			1px solid #CCCCCC;
+	border-left:		1px solid #CCCCCC;
+}
+.BBCode_table td
+{
+	border-bottom:		1px solid #CCCCCC;
+	border-right:		1px solid #CCCCCC;
+}
+.BBCode_img
+{
+	padding:			1px;
+	border:				3px #CCC solid;
+}
+.BBCode_styling_p
+{
+	padding:			0px;
+	margin:				0px;
+}
+  
