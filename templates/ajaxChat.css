@@ -2,15 +2,47 @@
   * AjaxChat Styles
   */
 
-.ajaxChat_Wrapper
+#ajaxChat_changeStatus
 {
 	position:			fixed;
-	width:				251px;
 	bottom:				0px;
-	right:				5px;
+	right:				0px;
+	width:				100px;
+	height:				23px;
+	border:				1px solid #AAA;
+	border-right:		0px;
+	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background.png');
+
+	text-align:			center;
+	text-decoration:	none;
+	font-weight:		bold;
+	line-height:		25px;
 }
-	
-.ajaxChat_Wrapper .ajaxChat_Tab
+#ajaxChat_changeStatus:hover
+{
+	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background_hover.png');
+}
+#ajaxChat_changeStatus .ajaxChat_changeStatus_online
+{
+	display:			block;
+	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_green.png');
+	background-position:right;
+}
+#ajaxChat_changeStatus .ajaxChat_changeStatus_offline
+{
+	display:			block;
+	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_red.png');
+	background-position:right;
+}
+
+.ajaxChat_chatWrapper
+{
+	position:			fixed;
+	bottom:				0px;
+	width:				251px;
+}
+
+.ajaxChat_chatWrapper .ajaxChat_Tab
 {
 	position:			relative;
 	width:				100%;
@@ -21,12 +53,12 @@
 	font-weight:		bold;
 	padding:			0px 0px 0px 15px;
 }
-.ajaxChat_Wrapper .ajaxChat_Tab:hover
+.ajaxChat_chatWrapper .ajaxChat_Tab:hover
 {
 	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background_hover.png');
 }
 
-.ajaxChat_Wrapper .ajaxChat_ChatWindow
+.ajaxChat_chatWrapper .ajaxChat_ChatWindow
 {
 	position:			relative;
 	border:				1px solid #BBB;
@@ -34,7 +66,7 @@
 	background:			#FFF;
 }
 
-.ajaxChat_Wrapper .ajaxChat_inputField
+.ajaxChat_chatWrapper .ajaxChat_inputField
 {
 	border:				0px;
 	border-top:			1px solid #BBB;
@@ -46,34 +78,79 @@
 	background-position:0px 50%;
 }
 
-.ajaxChat_Wrapper .ajaxChat_ChatContent
+.ajaxChat_chatWrapper .ajaxChat_ChatContent
 {
 	padding:			5px 5px 0px 5px;
 	height:				250px;
 	overflow:			auto;
 }
 
-.ajaxChat_Wrapper .ajaxChat_UserList
+.ajaxChat_chatWrapper .ajaxChat_UserList
 {
 	padding:			0px;
 	margin:				0px;
 	width:				250px;
 	height:				50px;
 	overflow:			auto;
+	border:				0px;
+	border-bottom:		1px solid #BBB;
 }
-.ajaxChat_Wrapper .ajaxChat_UserList .ajaxChat_UserList_activeUser
+
+.ajaxChat_chatWrapper .ajaxChat_UserList .ajaxChat_UserList_BG_grey
 {
-	padding:			2px 0px 0px 20px;
+	padding:			2px 0px 2px 0px;
 	height:				16px;
+	background:			#DDD;
+}
+.ajaxChat_chatWrapper .ajaxChat_UserList .ajaxChat_UserList_BG_white
+{
+	padding:			2px 0px 2px 0px;
+	height:				16px;
+	background:			#FFF;
+}
+.ajaxChat_chatWrapper .ajaxChat_UserList .ajaxChat_UserList_activeUser
+{
+	display:			block;
+	width:				230px;
+	height:				14px;
+	padding:			2px 0px 0px 20px;
 	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_green.png');
 }
-.ajaxChat_Wrapper .ajaxChat_UserList .ajaxChat_UserList_inactiveUser
+.ajaxChat_chatWrapper .ajaxChat_UserList .ajaxChat_UserList_inactiveUser
 {
-	padding:			2px 0px 0px 20px;
+	display:			block;
+	width:				230px;
 	height:				14px;
+	padding:			2px 0px 0px 20px;
 	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_black.png');
 }
-.ajaxChat_Wrapper .ajaxChat_UserList .ajaxChat_UserList_grayBG
+.ajaxChat_chatWrapper .ajaxChat_UserList li:hover
 {
 	background:			#CCC;
+}
+
+
+.ajaxChat_chatWrapper .ajaxChat_ChatWindow .ajaxChat_ChatContent .ajaxChat_chatMessage
+{
+	padding:			3px;
+	margin:				0px 0px 5px 0px;
+}
+.ajaxChat_chatWrapper .ajaxChat_ChatWindow .ajaxChat_ChatContent .ajaxChat_chatMessage span
+{
+	display:			block;
+	font-weight:		bold;
+	margin-bottom:		3px;
+}
+.ajaxChat_chatWrapper .ajaxChat_ChatWindow .ajaxChat_ChatContent .ajaxChat_chatMessage span span
+{
+	display:			inline;
+	font-weight:		normal;
+}
+.ajaxChat_chatWrapper .ajaxChat_ChatWindow .ajaxChat_ChatContent .ajaxChat_Message_BG_grey
+{
+	background:			#EEE;
+}
+.ajaxChat_chatWrapper .ajaxChat_ChatWindow .ajaxChat_ChatContent .ajaxChat_Message_BG_white
+{
+	background:			#FFF;
 }
