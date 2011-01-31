@@ -29,58 +29,33 @@
 
 
 
-
-<div class="ajaxChat_Wrapper" id="chatWindow_1">
+<div class="ajaxChat_chatWrapper" id="chatWindow_1" style="right: 100px;">
 	<table onclick="returnAjaxChatInstance(1).toggleChat();" class="ajaxChat_Tab" border="0" cellpadding="0" cellspacing="0">
 		<tr>
-			<td width="16" valign="middle"><img src="{_SITEPATH_}templates/chat_images/bullet_green.png" width="16" height="16" border="0" alt="" /></td>
-			<td valign="middle">Allgemein</td>
+			<td valign="middle">Chat Room 1</td>
 			<td width="16" valign="middle"><img src="{_SITEPATH_}templates/chat_images/bullet_arrow_up.png" width="16" height="16" border="0" alt="Open" /></td>
 		</tr>
 	</table>
-
 	<div class="ajaxChat_ChatWindow" style="display: none;">
 		<ul class="ajaxChat_UserList"><li>&nbsp;</li></ul>
 		<div class="ajaxChat_ChatContent"></div>
 		<input class="ajaxChat_inputField" type="text" />
 	</div>
 </div>
-
-<script type="text/javascript">
-<!--
-
-
-function getCssClassAttribute(className, attribute)
-{
-	var isIE		= checkBrowser('MSIE');
-	var countSheets	= document.styleSheets.length;
-
-	for(var i = 0; i < countSheets; i++)
-	{
-		if(isIE)
-		{
-			var classItem	= document.styleSheets[i].rules;
-		}
-		else
-		{
-			var classItem	= document.styleSheets[i].cssRules;
-		}
-
-		var value = classItem.item(className).style[attribute];
-		if(value != '')
-		{
-			return value;
-		}
-	}
-	
-	return null;
-}
-
-
--->
-</script>
-
-
+<div class="ajaxChat_chatWrapper" id="chatWindow_3" style="right: 350px;">
+	<table onclick="returnAjaxChatInstance(3).toggleChat();" class="ajaxChat_Tab" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td valign="middle">Chat Room 2</td>
+			<td width="16" valign="middle"><img src="{_SITEPATH_}templates/chat_images/bullet_arrow_up.png" width="16" height="16" border="0" alt="Open" /></td>
+		</tr>
+	</table>
+	<div class="ajaxChat_ChatWindow" style="display: none;">
+		<ul class="ajaxChat_UserList"><li>&nbsp;</li></ul>
+		<div class="ajaxChat_ChatContent"></div>
+		<input class="ajaxChat_inputField" type="text" />
+	</div>
+</div>
+<a id="ajaxChat_changeStatus" href="javascript:toggleAllChats();"><span class="ajaxChat_changeStatus_offline">go offline</span></a>
 
 
 
