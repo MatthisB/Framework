@@ -49,7 +49,7 @@ function intval(mixedVar)
 	{
 		return (mixedVar) ? 1 : 0;
 	}
-	if(type === 'number' && isFinite(mixedVar))
+	if((type === 'number' || type === 'string') && isFinite(mixedVar))
 	{
 		return Math.floor(mixedVar);
 	}
