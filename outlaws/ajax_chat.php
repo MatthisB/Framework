@@ -68,7 +68,14 @@ switch($action)
 		
 		foreach($entries as $entry)
 		{
-			echo '<entry authorID="'.$entry[0].'" author="'.$entry[1].'" time="'.$entry[2].'">'.$entry[3]."</entry>\n";
+			$subEntries	= '';
+			
+			foreach($entry[4] as $subEntry)
+			{
+				$subEntries .= '<subEntry><![CDATA['.$subEntry.']]></subEntry>';
+			}
+			
+			echo "\n".'<entry authorID="'.$entry[0].'" author="'.$entry[1].'" time="'.$entry[2].'" private="'.$entry[3].'">'.$subEntries.'</entry>';
 		}
 		
 		echo "\n</chat>";
@@ -80,7 +87,7 @@ switch($action)
 		foreach($users as $userID => $user)
 		{
 			++$colorI;
-			echo '<li userID="'.$userID.'" active="'.$user[0].'" class="ajaxChat_UserList_'.($user[0] == 0 ? 'in' : '').'activeUser"><a href="javascript:returnAjaxChatInstance('.$ajaxChat -> getChatID().').toUser('.$userID.');">'.$user[1].'</a></li>';
+			echo '<li userID="'.$userID.'" active="'.$user[0].'" class="ajaxChat_UserList_BG_'.($colorI % 2 ? 'white' : 'grey').'"><a href="javascript:returnAjaxChatInstance('.$ajaxChat -> getChatID().').toUser('.$userID.');" class="ajaxChat_UserList_'.($user[0] == 0 ? 'in' : '').'activeUser">'.$user[1].'</a></li>';
 		}
 		break;
 		
@@ -91,6 +98,10 @@ switch($action)
 		{
 			echo $insert;
 		}	
+		break;
+		
+	case 'closeChat':
+		$ajaxChat -> closeChat();
 		break;
 }
 
@@ -135,14 +146,19 @@ class AjaxChat
 						user.ID as userID,
 						user.nickName as nick,
 						chat.message as message,
-						DATE_FORMAT(chat.time, "%k:%s") as time,
-						chat.to_ID
+						DATE_FORMAT(chat.time, "%k:%i") as time,
+						chat.to_ID,
+						private.nickName as to_nick
 					FROM
 						'.PREFIX.'chatentries as chat
 					INNER JOIN
 						'.PREFIX.'user as user
 					ON
 						chat.from_ID	= user.ID
+					LEFT JOIN
+						'.PREFIX.'user as private
+					ON
+						chat.to_ID		= private.ID
 					WHERE
 						chat.room_ID	= '.$this -> chatID.'
 					AND
@@ -152,6 +168,8 @@ class AjaxChat
 							chat.to_ID = 0
 							OR
 							chat.to_ID = '.\Session\Scope::Instance() -> user -> ID.'
+							OR
+							chat.from_ID = '.\Session\Scope::Instance() -> user -> ID.'
 						)
 					ORDER BY
 						chat.time ASC';
@@ -167,15 +185,23 @@ class AjaxChat
 			
 			while($entry = $query -> FetchObj())
 			{
-				$entry -> message = ($entry -> to_ID != 0 ? '&lt;i&gt;(private)&lt;/i&gt; '.$entry -> message : $entry -> message);
-				
+				# wenn private nachricht, den author in "Author - Empfänger" ändern
+				if($entry -> to_ID != 0
+				&& ($entry -> to_ID == \Session\Scope::Instance() -> user -> ID
+					|| $entry -> userID == \Session\Scope::Instance() -> user -> ID
+					)
+				)
+				{
+					$entry -> nick = $entry -> nick.' - '.$entry -> to_nick;
+				}
+												
 				# Um Platz zu sparen, Namen/Uhrzeit nicht erneut anzeigen, 
 				# falls die Nachricht in der selben Minute geschrieben wurde wie die letzte und den selben Absender hat ...
 				if($i != 0
-				&& $entries[$i-1][0] == $entry -> nick
-				&& substr($entries[$i-1][1], -2) == substr($entry -> time, -2))
+				&& $entries[$i-1][1] == $entry -> nick
+				&& substr($entries[$i-1][2], -2) == substr($entry -> time, -2))
 				{
-					$entries[$i-1][2] .= "\n".$entry -> message;
+					$entries[$i-1][4][] = $entry -> message;
 					continue;
 				}
 				
@@ -183,7 +209,8 @@ class AjaxChat
 				$entries[$i] = array($entry -> userID,
 									$entry -> nick,	
 									$entry -> time,
-									$entry -> message);
+									($entry -> to_ID != 0 ? 1 : 0),
+									array($entry -> message));
 				
 				++$i;
 			}
@@ -230,7 +257,7 @@ class AjaxChat
 	}
 	public function insertMessage($message)
 	{
-		#$message	 = \Filter::XSS_EscapeString($message);
+		$message	 = \Filter::XSS_EscapeString($message);
 		$message	 = trim($message);
 		
 		if(empty($message))
@@ -258,6 +285,17 @@ class AjaxChat
 		$this -> updateActivities('lastInsert');
 		
 		return true;
+	}
+	public function closeChat()
+	{
+		$sql	 = 'DELETE FROM
+						'.PREFIX.'chatactivities
+					WHERE
+						room_ID	= "'.$this -> chatID.'"
+						AND
+						user_ID	= "'.\Session\Scope::Instance() -> user -> ID.'";';
+		$query	 = new \mySQL\Query();
+		$query	-> sqlQuery($sql);
 	}
 	
 	public static function doesRoomExists($chatID)
