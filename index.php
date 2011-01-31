@@ -54,7 +54,7 @@ define('PREFIX', \Registry::Instance()->mySQL_Standard_Data->prefix);
 define('LOGGEDIN', \Helper\Login::isLoggedIn());
 
 
-# Just a view design & template things
+# Just a few design & template things
 define('TEMPLATE_DIR', ROOT.'templates/'.\Registry::Instance() -> templateConfig -> defaultTemplate.'/');
 
 
@@ -195,9 +195,9 @@ else
 {
 	$scaffold -> runRoute();
 }
-/*
-*/
 
+
+# Just some BBCode tests here!
 die();
 
 $start = <<<'ANFANG'
