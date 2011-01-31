@@ -10,6 +10,59 @@ AJAX_CHAT_INSTANCES		= [];
 UPDATE_TICK_SPEED		= 5 * 1000;		// milliseconds
 USERLIST_TICK_SPEED		= 15 * 1000;	// milliseconds
 
+function toggleAllChats()
+{
+	var span		= $('ajaxChat_changeStatus').childNodes[0];
+	var chats		= document.getElementsByClassName('ajaxChat_chatWrapper');
+	
+	if(span.className == 'ajaxChat_changeStatus_offline')
+	{
+		span.className	= 'ajaxChat_changeStatus_online';
+		span.innerHTML	= 'go online';
+
+		for(var i = 0; i < chats.length; i++)
+		{
+			var chat	= $(chats[i].id);
+			
+			if(chat.getElementsByTagName('div')[0].style.display != 'none')
+			{
+				returnAjaxChatInstance(chats[i].id.replace('chatWindow_', '')).toggleChat();
+			}
+
+			chat.style.display	= 'none';
+		}
+	}
+	else
+	{
+		span.className	= 'ajaxChat_changeStatus_offline';
+		span.innerHTML	= 'go offline';
+
+		for(var i = 0; i < chats.length; i++)
+		{
+			$(chats[i].id).style.display	= 'block';
+		}
+	}
+}
+
+// für den schnelleren Zugriff auf die verschiedenen Container
+function returnAjaxChatElements(argChatID)
+{
+	argChatID							= intval(argChatID);
+	var chatWrapper						= $('chatWindow_' + argChatID);
+	var chatElements					= {};
+	
+	chatElements.table					= chatWrapper.getElementsByTagName('table')[0];
+	chatElements.tr						= {	'titel':	chatElements.table.getElementsByTagName('tr')[0].getElementsByTagName('td')[0],
+											'arrow':	chatElements.table.getElementsByTagName('tr')[0].getElementsByTagName('td')[1].getElementsByTagName('img')[0]
+											};
+	chatElements.chatWindow				= chatWrapper.getElementsByTagName('div')[0];
+	chatElements.chatWindow.userList	= chatElements.chatWindow.getElementsByTagName('ul')[0];
+	chatElements.chatWindow.chatContent	= chatElements.chatWindow.getElementsByTagName('div')[0];
+	chatElements.chatWindow.InputField	= chatElements.chatWindow.getElementsByTagName('input')[0];
+
+	return chatElements;
+}
+
 function returnAjaxChatInstance(argChatID)
 {
 	if(!array_key_exists(argChatID, AJAX_CHAT_INSTANCES))
@@ -21,26 +74,15 @@ function returnAjaxChatInstance(argChatID)
 }
 
 var ajaxChat = function(argChatID)
-{	
+{
 	argChatID				= intval(argChatID);
 	
 	var updateInterval		= null;
 	var userListInterval	= null;
 	var lastUpdate			= null;
+	var chatObjects			= returnAjaxChatElements(argChatID);
 	
-	// für den schnelleren Zugriff auf die verschiedenen Container
-	var chatWrapper						= $('chatWindow_' + argChatID);
-	var chatObjects						= {};
-	chatObjects.table					= chatWrapper.getElementsByTagName('table')[0];
-	chatObjects.tr						= {	'status':	chatObjects.table.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].getElementsByTagName('img')[0],
-											'titel':	chatObjects.table.getElementsByTagName('tr')[0].getElementsByTagName('td')[1],
-											'arrow':	chatObjects.table.getElementsByTagName('tr')[0].getElementsByTagName('td')[2].getElementsByTagName('img')[0]
-											};
-	chatObjects.chatWindow				= chatWrapper.getElementsByTagName('div')[0];
-	chatObjects.chatWindow.userList		= chatObjects.chatWindow.getElementsByTagName('ul')[0];
-	chatObjects.chatWindow.chatContent	= chatObjects.chatWindow.getElementsByTagName('div')[0];
-	chatObjects.chatWindow.InputField	= chatObjects.chatWindow.getElementsByTagName('input')[0];
-	
+	var message_BG_color	= 0;
 	
 	this.toggleChat = function()
 	{
@@ -64,6 +106,16 @@ var ajaxChat = function(argChatID)
 			slider.down();
 		}
 	}
+	this.toUser = function(userID)
+	{
+		if(!is_int(userID))
+		{
+			return false;
+		}
+		
+		chatObjects.chatWindow.InputField.value	= '/to ' + userID + ' ';
+		chatObjects.chatWindow.InputField.focus();
+	}
 	
 	var openChat = function()
 	{
@@ -83,32 +135,55 @@ var ajaxChat = function(argChatID)
 		{
 			window.clearInterval(userListInterval);
 		}
+
+		var ajaxReq = new AjaxRequest('http://localhost/eclipse_workspace/Framework/ajax/chat/closeChat/'+argChatID+'/', 'GET', function(){}, '');
 	}
 	var updateContent = function()
 	{
 		if(arguments.length == 2)
 		{
 			var xmlResponse			= arguments[1];
+
+			if(xmlResponse == null)
+			{
+				return;
+			}
+
 			var newEntries			= xmlResponse.getElementsByTagName('entry');
 			var scrollToBottom		= (parseInt(chatObjects.chatWindow.chatContent.scrollHeight - chatObjects.chatWindow.chatContent.scrollTop) === parseInt(chatObjects.chatWindow.chatContent.clientHeight) ? true : false);
 			var updateUserStatus	= [];
 			
+			
 			for(var i = 0; i < newEntries.length; i++)
 			{
 				var newEntry		= newEntries[i];
-				var span			= document.createElement('span');
+				var p				= document.createElement('p');
+				var privateMsg		= (newEntry.getAttribute('private') != '0' ? true : false);
+				var msgContent		= '';
+				var className		= (message_BG_color % 2 ? 'ajaxChat_Message_BG_grey' : 'ajaxChat_Message_BG_white');
+								
+				for(var x = 0; x < newEntry.childNodes.length; x++)
+				{
+					msgContent		+= (privateMsg ? '<i>(private)</i> ' : '') + newEntry.childNodes[x].firstChild.nodeValue + '<br />';
+				}
 				
-				// TODO: hier mit CSS arbeiten
-				span.innerHTML		= '<b>' + newEntry.getAttribute('author') + '</b> ( ' + newEntry.getAttribute('time') + ' ):<br />' + newEntry.firstChild.nodeValue.replace("\n", '<br />') + '<br /><br />';
-				chatObjects.chatWindow.chatContent.appendChild(span);
+				p.className			= 'ajaxChat_chatMessage ' + className;
+				p.innerHTML			= '<span>' + newEntry.getAttribute('author') 
+									+ ' (<span> ' + newEntry.getAttribute('time') + ' </span>):'
+									+ '</span>'
+									+ msgContent;
+				
+				chatObjects.chatWindow.chatContent.appendChild(p);
 				
 				updateUserStatus[i]	= newEntry.getAttribute('authorID');
+				
+				++message_BG_color;
 			}
 			
 			// immer zum neuesten eintrag scrollen, falls der User nicht nach oben gescrollt hat und es neue Einträge gibt
 			if(scrollToBottom && newEntries.length >= 1)
 			{
-				span.scrollIntoView();
+				p.scrollIntoView();
 			}
 			
 			// für die "schnellere aktualisierung" der user aktivitäten, aber nur wenn die user liste nicht sowieso gerade erst geladen wurde
@@ -122,7 +197,7 @@ var ajaxChat = function(argChatID)
 				&& user.getAttribute('active') != '1')
 				{
 					user.setAttribute('active', '1');
-					user.setAttribute('class', 'ajaxChat_UserList_activeUser');
+					user.getElementsByTagName('a')[0].setAttribute('class', 'ajaxChat_UserList_activeUser');
 					delete(updateUserStatus[deleteIndex]);
 				}
 			}
