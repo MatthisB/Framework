@@ -181,7 +181,9 @@ function varDump()
 }
 
 
-
+// deactivated for testing ajaxchat!
+if(\Helper\URL::Instance()->_class != 'NULL')
+{
 # Load and Run Page Core
 $controller	= \Helper\URL::Instance()->_class;
 $action		= \Helper\URL::Instance()->_method;
@@ -195,6 +197,113 @@ else
 {
 	$scaffold -> runRoute();
 }
+die();
+}
+
+# Just some AjaxChat tests here!
+$start = <<<'ANFANG'
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--
+  
+  Author:	Matthis
+  Date:		01.06.2010
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Matthis Framework | News</title>
+
+
+<meta name="keywords" content="Matthis Brugger Framework CMS PHP OOP MVC" />
+
+<meta name="description" content="Matthis Brugger Framework / CMS" />
+
+
+<link href="http://localhost/eclipse_workspace/Framework/templates/default/default_style.css" rel="stylesheet" type="text/css" />
+
+
+<script type="text/javascript" src="http://localhost/eclipse_workspace/Framework/javascript/FrameworkConfig.js/"></script>
+
+
+<script type="text/javascript" src="http://localhost/eclipse_workspace/Framework/templates/ajaxChat.js"></script>
+
+<link href="http://localhost/eclipse_workspace/Framework/templates/ajaxChat.css" rel="stylesheet" type="text/css" />
+
+
+
+<script type="text/javascript" src="http://localhost/eclipse_workspace/Framework/templates/basicFunctions.js"></script>
+
+<script type="text/javascript" src="http://localhost/eclipse_workspace/Framework/templates/basicClasses.js"></script>
+
+<link href="http://localhost/eclipse_workspace/Framework/templates/basicStyles.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+ANFANG;
+echo $start;
+
+class AjaxChat_CreateHTML
+{
+	protected
+		$output		= '',
+		$isOnline	= false;
+	
+	public function __construct()
+	{
+		if(!LOGGEDIN)
+		{
+			die('You have to be logged in to use the chat system!');
+		}
+		
+		$this	 -> isOnline	 = (!isset(\Session\Scope::Instance() -> ajaxChat -> status) || \Session\Scope::Instance() -> ajaxChat -> status == 'online' ? true : false);
+	}
+	public function listRooms($where = '')
+	{
+		return;
+		$marginRight = 100;
+		$template	 = '
+			<div class="ajaxChat_chatWrapper" id="chatWindow_'.$room -> ID.'" style="right: '.$marginRight.'px;">
+				<table onclick="returnAjaxChatInstance('.$room -> ID.').toggleChat();" class="ajaxChat_Tab" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td valign="middle">'.$room -> name.'</td>
+						<td width="16" valign="middle"><img src="'.\Helper\URL::$_SITEPATH.'templates/chat_images/bullet_arrow_up.png" width="16" height="16" border="0" alt="Open" /></td>
+					</tr>
+				</table>
+				<div class="ajaxChat_ChatWindow" style="display: none;">
+					<ul class="ajaxChat_UserList"><li>&nbsp;</li></ul>
+					<div class="ajaxChat_ChatContent"></div>
+					<input class="ajaxChat_inputField" type="text" />
+				</div>
+			</div>';
+	}
+	public function createChatBar()
+	{
+		if($this -> isOnline)
+		{
+			$this	 -> output	.= '<a id="ajaxChat_changeStatus" href="javascript:toggleAllChats();"><span class="ajaxChat_changeStatus_offline">go offline</span></a>';
+		}
+		else
+		{
+			$this	 -> output	.= '<a id="ajaxChat_changeStatus" href="javascript:toggleAllChats();"><span class="ajaxChat_changeStatus_online">go online</span></a>';
+		}
+	}
+	public function printChatBar()
+	{
+		echo $this -> output;
+	}
+	public function returnChatBar()
+	{
+		return $this -> output;
+	}
+}
+
+$ajaxChat	 = new \AjaxChat_CreateHTML();
+$ajaxChat	-> listRooms();
+$ajaxChat	-> createChatBar();
+$ajaxChat	-> printChatBar();
+
+echo '</body></html>';
 
 
 # Just some BBCode tests here!
