@@ -127,7 +127,7 @@ class StarRating
 			{
 				$attributes['id'] = $starID.$i; 
 			}
-			echo \Helper\HTML::image('http://localhost/eclipse_workspace/Framework/templates/rating/star_2.png', '16', '16', $i, '0', $attributes);
+			echo \Helper\HTML::image(\Helper\URL::$_SITEPATH.'templates/rating/star_2.png', '16', '16', $i, '0', $attributes);
 		}
 		for($i = ($stars + 1); $i <= $this->stars; $i++)
 		{
@@ -135,7 +135,7 @@ class StarRating
 			{
 				$attributes['id'] = $starID.$i; 
 			}
-			echo \Helper\HTML::image('http://localhost/eclipse_workspace/Framework/templates/rating/star_1.png', '16', '16', $i, '0', $attributes);
+			echo \Helper\HTML::image(\Helper\URL::$_SITEPATH.'templates/rating/star_1.png', '16', '16', $i, '0', $attributes);
 		}
 		
 		echo '</div>';
