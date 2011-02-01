@@ -103,6 +103,14 @@ switch($action)
 	case 'closeChat':
 		$ajaxChat -> closeChat();
 		break;
+		
+	case 'goOffline':
+		\Session\Scope::Instance() -> ajaxChat -> status = 'offline';
+		break;
+	
+	case 'goOnline':
+		\Session\Scope::Instance() -> ajaxChat -> status = 'online';
+		break;
 }
 
 class AjaxChat
@@ -112,6 +120,11 @@ class AjaxChat
 
 	public function __construct($chatID)
 	{
+		if(!LOGGEDIN)
+		{
+			die('You have to be logged in to use the chat system!');
+		}
+
 		$this -> chatID		 = \Filter::Int($chatID);
 		
 		$sql	 = 'INSERT IGNORE INTO
