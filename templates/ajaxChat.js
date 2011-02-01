@@ -31,6 +31,8 @@ function toggleAllChats()
 
 			chat.style.display	= 'none';
 		}
+		
+		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/goOffline/', 'GET', function(){}, '');
 	}
 	else
 	{
@@ -41,6 +43,8 @@ function toggleAllChats()
 		{
 			$(chats[i].id).style.display	= 'block';
 		}
+		
+		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/goOnline/', 'GET', function(){}, '');
 	}
 }
 
@@ -89,7 +93,7 @@ var ajaxChat = function(argChatID)
 		if(chatObjects.tr.arrow.alt == 'Close')
 		{
 			chatObjects.tr.arrow.alt	= 'Open';
-			chatObjects.tr.arrow.src	= 'http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_arrow_up.png';
+			chatObjects.tr.arrow.src	= FRAMEWORK_CONFIG.SITEPATH + 'templates/chat_images/bullet_arrow_up.png';
 			
 			var slider	= new Slider(chatObjects.chatWindow);
 			slider.up();
@@ -99,7 +103,7 @@ var ajaxChat = function(argChatID)
 		else
 		{			
 			chatObjects.tr.arrow.alt	= 'Close';
-			chatObjects.tr.arrow.src	= 'http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_arrow_down.png';
+			chatObjects.tr.arrow.src	= FRAMEWORK_CONFIG.SITEPATH + 'templates/chat_images/bullet_arrow_down.png';
 			
 			// erst laden nachdem der Slider fertig ist, damit alle Einträge korrekt angezeigt wird
 			var slider	= new Slider(chatObjects.chatWindow, {onComplete: openChat});
@@ -136,7 +140,7 @@ var ajaxChat = function(argChatID)
 			window.clearInterval(userListInterval);
 		}
 
-		var ajaxReq = new AjaxRequest('http://localhost/eclipse_workspace/Framework/ajax/chat/closeChat/'+argChatID+'/', 'GET', function(){}, '');
+		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/closeChat/'+argChatID+'/', 'GET', function(){}, '');
 	}
 	var updateContent = function()
 	{
@@ -206,7 +210,7 @@ var ajaxChat = function(argChatID)
 		}
 		else
 		{
-			var ajaxReq	= new AjaxRequest('http://localhost/eclipse_workspace/Framework/ajax/chat/update/'+argChatID+'/'+lastUpdate+'/', 'GET', updateContent, '');
+			var ajaxReq	= new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/update/'+argChatID+'/'+lastUpdate+'/', 'GET', updateContent, '');
 		}
 	}
 	var updateUserList = function()
@@ -217,7 +221,7 @@ var ajaxChat = function(argChatID)
 		}
 		else
 		{
-			var ajaxReq = new AjaxRequest('http://localhost/eclipse_workspace/Framework/ajax/chat/userList/'+argChatID+'/', 'GET', updateUserList, '');
+			var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/userList/'+argChatID+'/', 'GET', updateUserList, '');
 		}
 	}
 	var sendMessage = function(e)
@@ -232,7 +236,7 @@ var ajaxChat = function(argChatID)
 		if(e.keyCode == 13)
 		{
 			var params	= 'message=' + chatObjects.chatWindow.InputField.value;
-			var ajaxReq	= new AjaxRequest('http://localhost/eclipse_workspace/Framework/ajax/chat/insertMessage/'+argChatID+'/', 'POST', sendMessageResult, params);
+			var ajaxReq	= new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/insertMessage/'+argChatID+'/', 'POST', sendMessageResult, params);
 		}
 	}
 	var sendMessageResult = function(html, xml)

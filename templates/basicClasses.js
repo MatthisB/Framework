@@ -227,7 +227,7 @@ var StarRating = function(argID)
 	var sendVote = function()
 	{
 		var params	= 'rate=true&typea=' + rating.type + '&typeID=' + rating.typeID + '&value=' + rating.current.value + '&stars=' + rating.stars;
-		var ajaxReq	= new AjaxRequest('http://localhost/eclipse_workspace/Framework/ajax/rating/', 'POST', showVoteResult, params);
+		var ajaxReq	= new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/rating/', 'POST', showVoteResult, params);
 	}
 	var showVoteResult = function(text, xml)
 	{
@@ -242,7 +242,7 @@ var StarRating = function(argID)
 		
 		for(i = 1; i <= rating.current.value; i++)
 		{
-			document.getElementById('Rating_Star_' + rating.type + '_' + rating.typeID + '_' + i).src = 'http://localhost/eclipse_workspace/Framework/templates/rating/star_3.png';
+			document.getElementById('Rating_Star_' + rating.type + '_' + rating.typeID + '_' + i).src = FRAMEWORK_CONFIG.SITEPATH + 'templates/rating/star_3.png';
 		}
 	}
 	var mouseOut = function()
@@ -251,12 +251,12 @@ var StarRating = function(argID)
 		
 		for(i = 1; i <= rating.current.result; i++)
 		{
-			document.getElementById('Rating_Star_' + rating.type + '_' + rating.typeID + '_' + i).src = 'http://localhost/eclipse_workspace/Framework/templates/rating/star_2.png';
+			document.getElementById('Rating_Star_' + rating.type + '_' + rating.typeID + '_' + i).src = FRAMEWORK_CONFIG.SITEPATH + 'templates/rating/star_2.png';
 		}
 
 		for(i = rating.current.result + 1; i <= rating.current.value; i++)
 		{
-			document.getElementById('Rating_Star_' + rating.type + '_' + rating.typeID + '_' + i).src = 'http://localhost/eclipse_workspace/Framework/templates/rating/star_1.png';
+			document.getElementById('Rating_Star_' + rating.type + '_' + rating.typeID + '_' + i).src = FRAMEWORK_CONFIG.SITEPATH + 'templates/rating/star_1.png';
 		}
 	}
 	

@@ -105,7 +105,7 @@ function reloadCaptcha(id)
 {
 	var rand	= Math.floor(Math.random()*1000);
 	
-	document.getElementById('captcha_' + id).src	= 'http://localhost/eclipse_workspace/Framework/captcha/'+id+'/image.png';
+	document.getElementById('captcha_' + id).src	= FRAMEWORK_CONFIG.SITEPATH + 'captcha/'+id+'/image.png';
 }
 
 function Toggle(argID, argOptions)
