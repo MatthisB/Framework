@@ -11,7 +11,7 @@
 	height:				23px;
 	border:				1px solid #AAA;
 	border-right:		0px;
-	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background.png');
+	background:			repeat-x url('$_SITEPATHtemplates/chat_images/tab_background.png');
 
 	text-align:			center;
 	text-decoration:	none;
@@ -20,18 +20,18 @@
 }
 #ajaxChat_changeStatus:hover
 {
-	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background_hover.png');
+	background:			repeat-x url('$_SITEPATHtemplates/chat_images/tab_background_hover.png');
 }
 #ajaxChat_changeStatus .ajaxChat_changeStatus_online
 {
 	display:			block;
-	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_green.png');
+	background:			no-repeat url('$_SITEPATHtemplates/chat_images/bullet_green.png');
 	background-position:right;
 }
 #ajaxChat_changeStatus .ajaxChat_changeStatus_offline
 {
 	display:			block;
-	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_red.png');
+	background:			no-repeat url('$_SITEPATHtemplates/chat_images/bullet_red.png');
 	background-position:right;
 }
 
@@ -48,14 +48,14 @@
 	width:				100%;
 	height:				25px;
 	border:				1px solid #AAA;
-	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background.png');
+	background:			repeat-x url('$_SITEPATHtemplates/chat_images/tab_background.png');
 	cursor:				pointer;
 	font-weight:		bold;
 	padding:			0px 0px 0px 15px;
 }
 .ajaxChat_chatWrapper .ajaxChat_Tab:hover
 {
-	background:			repeat-x url('http://localhost/eclipse_workspace/Framework/templates/chat_images/tab_background_hover.png');
+	background:			repeat-x url('$_SITEPATHtemplates/chat_images/tab_background_hover.png');
 }
 
 .ajaxChat_chatWrapper .ajaxChat_ChatWindow
@@ -74,7 +74,7 @@
 	height:				20px;
 	padding:			0px 5px 0px 20px;
 	
-	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/text_signature.png');
+	background:			no-repeat url('$_SITEPATHtemplates/chat_images/text_signature.png');
 	background-position:0px 50%;
 }
 
@@ -89,7 +89,7 @@
 {
 	padding:			0px;
 	margin:				0px;
-	width:				250px;
+	width:				249px;
 	height:				50px;
 	overflow:			auto;
 	border:				0px;
@@ -111,18 +111,18 @@
 .ajaxChat_chatWrapper .ajaxChat_UserList .ajaxChat_UserList_activeUser
 {
 	display:			block;
-	width:				230px;
+	width:				225px;
 	height:				14px;
 	padding:			2px 0px 0px 20px;
-	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_green.png');
+	background:			no-repeat url('$_SITEPATHtemplates/chat_images/bullet_green.png');
 }
 .ajaxChat_chatWrapper .ajaxChat_UserList .ajaxChat_UserList_inactiveUser
 {
 	display:			block;
-	width:				230px;
+	width:				225px;
 	height:				14px;
 	padding:			2px 0px 0px 20px;
-	background:			no-repeat url('http://localhost/eclipse_workspace/Framework/templates/chat_images/bullet_black.png');
+	background:			no-repeat url('$_SITEPATHtemplates/chat_images/bullet_black.png');
 }
 .ajaxChat_chatWrapper .ajaxChat_UserList li:hover
 {

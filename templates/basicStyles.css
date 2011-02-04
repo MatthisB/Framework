@@ -10,13 +10,13 @@
 {
 	height:				16px;
 	padding:			2px 0 0 16px;
-	background:			url(http://localhost/eclipse_workspace/Framework/templates/images/bullet_arrow_down.png) no-repeat;
+	background:			url('$_SITEPATHtemplates/images/bullet_arrow_down.png') no-repeat;
 }
 .desc
 {
 	height:				16px;
 	padding:			2px 0 0 15px;
-	background:			url(http://localhost/eclipse_workspace/Framework/templates/images/bullet_arrow_up.png) no-repeat;
+	background:			url('$_SITEPATHtemplates/images/bullet_arrow_up.png') no-repeat;
 }
 
 /**
@@ -81,7 +81,7 @@
 	
 	width:				43px;
 	height:				11px;
-	background:			url(http://localhost/eclipse_workspace/Framework/templates/ajax-loader.gif) no-repeat;
+	background:			url('$_SITEPATHtemplates/ajax-loader.gif') no-repeat;
 }
   
   
