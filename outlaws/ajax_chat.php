@@ -45,6 +45,16 @@ if(!LOGGEDIN)
 	die('You have to be logged in to use the chat system!');
 }
 
+# TODO: siehe springpadit - 'alle einträge aus acitivites löschen' etc.
+if(\Helper\URL::Instance()->_2 == 'setStatus'
+&& (\Helper\URL::Instance()->_3 == 'online' || \Helper\URL::Instance()->_3 == 'offline'))
+{
+	\Session\Scope::Instance() -> ajaxChat	 = new \ArrayObject();
+	\Session\Scope::Instance() -> ajaxChat -> status = \Helper\URL::Instance()->_3;
+}
+else
+{
+
 $chatID		 = \Helper\URL::Instance()->_3;
 if(!\isValid::Numeric($chatID)
 || !\AjaxChat::doesRoomExists($chatID))
@@ -103,14 +113,7 @@ switch($action)
 	case 'closeChat':
 		$ajaxChat -> closeChat();
 		break;
-		
-	case 'goOffline':
-		\Session\Scope::Instance() -> ajaxChat -> status = 'offline';
-		break;
-	
-	case 'goOnline':
-		\Session\Scope::Instance() -> ajaxChat -> status = 'online';
-		break;
+}
 }
 
 class AjaxChat
@@ -152,7 +155,7 @@ class AjaxChat
 		}
 		else
 		{
-			$where	= '( SELECT firstOpen FROM '.PREFIX.'chatactivities WHERE user_ID = '.\Session\Scope::Instance() -> user -> ID.' )';
+			$where	= '( SELECT firstOpen FROM '.PREFIX.'chatactivities WHERE room_ID = '.$this -> chatID.' AND user_ID = '.\Session\Scope::Instance() -> user -> ID.' )';
 		}
 
 		$sql	 = 'SELECT
