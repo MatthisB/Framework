@@ -181,6 +181,7 @@ function varDump()
 }
 
 
+
 # Load and Run Page Core
 $controller	= \Helper\URL::Instance()->_class;
 $action		= \Helper\URL::Instance()->_method;
@@ -197,10 +198,9 @@ else
 
 
 
-
 # Just some BBCode tests here!
-die();
 
+/*
 $start = <<<'ANFANG'
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -349,7 +349,6 @@ WHERE
 #varDump(preg_match('/\[(\w+)((?:\s|=)[^]]*)?\]((?:[^[]|\[(?!\/?\1((?:\s|=)[^]]*)?\])|(?R))+)\[\/\1\]/', $string2, $array), $array);
 #die();
 
-
 $string		 = $string2;
 
 $bbcode	 = new \Helper\BBCode($string);
@@ -358,3 +357,4 @@ $bbcode	 = $bbcode -> parseBBCode();
 echo $string."\n\n<br /><hr /><br />\n\n".$bbcode;
 
 echo '</body></html>';
+*/
