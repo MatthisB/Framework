@@ -32,7 +32,7 @@ function toggleAllChats()
 			chat.style.display	= 'none';
 		}
 		
-		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/goOffline/', 'GET', function(){}, '');
+		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/setStatus/offline/', 'GET', function(){}, '');
 	}
 	else
 	{
@@ -44,7 +44,7 @@ function toggleAllChats()
 			$(chats[i].id).style.display	= 'block';
 		}
 		
-		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/goOnline/', 'GET', function(){}, '');
+		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/setStatus/online/', 'GET', function(){}, '');
 	}
 }
 
@@ -106,7 +106,7 @@ var ajaxChat = function(argChatID)
 			chatObjects.tr.arrow.src	= FRAMEWORK_CONFIG.SITEPATH + 'templates/chat_images/bullet_arrow_down.png';
 			
 			// erst laden nachdem der Slider fertig ist, damit alle Einträge korrekt angezeigt wird
-			var slider	= new Slider(chatObjects.chatWindow, {onComplete: openChat});
+			var slider	= new Slider(chatObjects.chatWindow, {onComplete: this.openChat});
 			slider.down();
 		}
 	}
@@ -120,8 +120,7 @@ var ajaxChat = function(argChatID)
 		chatObjects.chatWindow.InputField.value	= '/to ' + userID + ' ';
 		chatObjects.chatWindow.InputField.focus();
 	}
-	
-	var openChat = function()
+	this.openChat = function()
 	{
 		updateContent();
 		updateUserList();
@@ -129,6 +128,7 @@ var ajaxChat = function(argChatID)
 		updateInterval		= setInterval(updateContent, UPDATE_TICK_SPEED);
 		userListInterval	= setInterval(updateUserList, USERLIST_TICK_SPEED);
 	}
+	
 	var closeChat = function()
 	{	
 		if(updateInterval != null)
