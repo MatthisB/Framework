@@ -22,7 +22,7 @@ class p_AjaxChat extends \Plugins\a_Plugin implements \Plugins\i_Plugin
 			return;
 		}
 
-		$this	 -> isOnline	 = (!isset(\Session\Scope::Instance() -> ajaxChat -> status) || \Session\Scope::Instance() -> ajaxChat -> status == 'online' ? true : false);
+		$this	 -> isOnline	 = (!isset(\Session\Scope::Instance() -> ajaxChat -> status) || \Session\Scope::Instance() -> ajaxChat -> status != 'online' ? true : false);
 	}
 	public function runPlugin()
 	{
