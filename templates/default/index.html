@@ -14,52 +14,21 @@
 <meta name="{$siteMeta[name]}" content="{$siteMeta[content]}" />
 {/LOOP $siteMeta}
 
-{CSS templates/default/default_style.css}
+{CSS css/templates/default/default_style.css}
 
 {JS javascript/FrameworkConfig.js/}
 
 {JS templates/ajaxChat.js}
-{CSS templates/ajaxChat.css}
+{CSS css/templates/ajaxChat.css}
 
 
 {JS templates/basicFunctions.js}
 {JS templates/basicClasses.js}
-{CSS templates/basicStyles.css}
+{CSS css/templates/basicStyles.css}
+
+{CSS css/templates/as.css}
 </head>
 <body>
-
-
-
-<div class="ajaxChat_chatWrapper" id="chatWindow_1" style="right: 100px;">
-	<table onclick="returnAjaxChatInstance(1).toggleChat();" class="ajaxChat_Tab" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td valign="middle">Chat Room 1</td>
-			<td width="16" valign="middle"><img src="{_SITEPATH_}templates/chat_images/bullet_arrow_up.png" width="16" height="16" border="0" alt="Open" /></td>
-		</tr>
-	</table>
-	<div class="ajaxChat_ChatWindow" style="display: none;">
-		<ul class="ajaxChat_UserList"><li>&nbsp;</li></ul>
-		<div class="ajaxChat_ChatContent"></div>
-		<input class="ajaxChat_inputField" type="text" />
-	</div>
-</div>
-<div class="ajaxChat_chatWrapper" id="chatWindow_3" style="right: 350px;">
-	<table onclick="returnAjaxChatInstance(3).toggleChat();" class="ajaxChat_Tab" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td valign="middle">Chat Room 2</td>
-			<td width="16" valign="middle"><img src="{_SITEPATH_}templates/chat_images/bullet_arrow_up.png" width="16" height="16" border="0" alt="Open" /></td>
-		</tr>
-	</table>
-	<div class="ajaxChat_ChatWindow" style="display: none;">
-		<ul class="ajaxChat_UserList"><li>&nbsp;</li></ul>
-		<div class="ajaxChat_ChatContent"></div>
-		<input class="ajaxChat_inputField" type="text" />
-	</div>
-</div>
-<a id="ajaxChat_changeStatus" href="javascript:toggleAllChats();"><span class="ajaxChat_changeStatus_offline">go offline</span></a>
-
-
-
 
 <div style="float: left; width: 80%;">
 	<h2>{$siteHeader}</h2>
@@ -78,5 +47,7 @@
 Geladene Klassen: {_BENCHMARK_LOADED_CLASSES_}<br />
 Ausgeführte MySQL Queries: {_BENCHMARK_EXECUTED_QUERIES_}<br />
 Parsetime: {_BENCHMARK_PARSE_TIME_} s
+
+{PLUGIN Chat::AjaxChat}
 </body>
 </html>
