@@ -12,7 +12,7 @@ namespace Helper;
 class Login extends \a_Singleton
 {
 	private static
-	$isLoggedIn	= false;
+		$isLoggedIn	= false;
 
 	protected function __construct()
 	{

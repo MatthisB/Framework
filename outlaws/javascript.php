@@ -9,7 +9,7 @@
 
 # TODO: wenn \Helper\URL::Instance()->_2 im javascript ordner exisitert komprimiert und gecached ausgeben
 
-\Registry::Instance()->Header->addHeader('Content-Type', 'application/javascript');
+\Registry::Instance()->Header->addHeader('Content-Type', 'text/javascript');
 
 switch(\Helper\URL::Instance()->_1)
 {
