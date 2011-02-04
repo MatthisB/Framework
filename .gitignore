@@ -1,2 +1,4 @@
 system/files/inis/mysql.ini
+system/files/cache/*
+system/files/logs/*
 bin
