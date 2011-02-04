@@ -111,7 +111,7 @@ class Scaffold
 			
 			# load template config
 			$templateIni	= \Registry::Instance() -> templateConfig;
-			$siteTemplate	= new \Template('index.html', 'templates/'.$templateIni->defaultTemplate.'/');
+			$siteTemplate	= new \Template\HTML('index.html', 'templates/'.$templateIni->defaultTemplate.'/');
 			
 			# TRICKY: Meta Tags aus Controller laden; default Werte einfügen falls benötigt; in Template freundliches Array-Format bringen
 			$metaTagsTMP = (array) $controllerObj->getMeta();

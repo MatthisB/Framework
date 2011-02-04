@@ -18,7 +18,7 @@ abstract class a_View
 		$namespace		= strtolower($namespace);
 		$templateName	= 't_'.$templateName;
 
-		return new \Template($templateName, $namespace);
+		return new \Template\HTML($templateName, $namespace);
 	}
 	protected function __loadTemplateCached($templateName, $lifetime = 3600)
 	{
@@ -27,6 +27,6 @@ abstract class a_View
 		$namespace		= strtolower($namespace);
 		$templateName	= 't_'.$templateName;
 			
-		return new \TemplateCached($templateName, NULL, $lifetime, $namespace);
+		return new \Template\HTML_Cached($templateName, NULL, $lifetime, $namespace);
 	}
 }

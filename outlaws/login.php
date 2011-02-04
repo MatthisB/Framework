@@ -14,7 +14,7 @@ class LoginLogout
 		
 	public function __construct()
 	{
-		$this->template	= new \Template('login.html', TEMPLATE_DIR);
+		$this->template	= new \Template\HTML('login.html', TEMPLATE_DIR);
 		
 		try
 		{

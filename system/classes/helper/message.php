@@ -13,7 +13,7 @@ class Message extends \Helper\HTML
 {
 	public static function __callstatic($style, $args)
 	{
-		$template  = new \Template('helper_message', 'system/files/templates/');
+		$template  = new \Template\HTML('helper_message', 'system/files/templates/');
 		$template -> class		= 'Message'.ucfirst($style);
 		$template -> message	= $args[0];
 		$template -> headLine	= (isset($args[1]) && !empty($args[1]) ? $args[1] : '');

@@ -42,7 +42,7 @@ class v_Register extends \MVC\a_View implements \MVC\i_View
 		$body	  = 'Hey '.$nick.',<br />'
 				  . 'to complete your activation you have to click here: <a href="'.\Registry::Instance() -> frameworkConfig -> sitePath.'user/activation/'.$userID.'/'.$hash.'/">Activation Link</a>.';
 		
-		$message  = new \Template('email_wrapper.html', TEMPLATE_DIR);
+		$message  = new \Template\HTML('email_wrapper.html', TEMPLATE_DIR);
 		$message -> subject	= $subject;
 		$message -> body	= $body;
 		$message  = $message -> returnTemplate();

@@ -17,7 +17,7 @@ class mySQLError extends \Exception\a_Exception
 	
 	private function printError($headLine, $errorCode, $errorMessage, $query)
 	{
-		$template  = new \Template('mysql_error', 'system/files/templates/');
+		$template  = new \Template\HTML('mysql_error', 'system/files/templates/');
 		$template -> headLine		= $headLine;
 		$template -> errorCode		= $errorCode;
 		$template -> errorMessage	= $errorMessage;
