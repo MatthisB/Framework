@@ -274,6 +274,7 @@ class AjaxChat
 	public function insertMessage($message)
 	{
 		$message	 = \Filter::XSS_EscapeString($message);
+		$message	 = \Filter::mySQL_RealEscapeString($message);
 		$message	 = trim($message);
 		
 		if(empty($message))
