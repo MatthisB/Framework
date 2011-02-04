@@ -39,7 +39,7 @@ class LoginLogout
 	{
 		if(LOGGEDIN)
 		{
-			throw new \Exception\NormalError(\Session\Scope::Instance() -> user['Nick'].', you\'re already loggedin!', array('showForm' => false));
+			throw new \Exception\NormalError(\Session\Scope::Instance() -> user -> Nick.', you\'re already loggedin!', array('showForm' => false));
 		}
 		
 		$logFails	= new \Helper\AvoidSpam(\Registry::Instance() -> frameworkConfig -> login['lockTime'], 'login');
