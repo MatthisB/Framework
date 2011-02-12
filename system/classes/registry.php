@@ -16,6 +16,13 @@ class Registry extends \a_Singleton
 	{
 		$this->loadStandardConfigs();
 	}
+	/**
+	 * add a variable to registry
+	 * 
+	 * @param	string	$key
+	 * @param	mixed	$value
+	 * @return	bool
+	 */
 	public function __set($key, $value)
 	{
 		if(!array_key_exists($key, self::$vars))
@@ -25,6 +32,11 @@ class Registry extends \a_Singleton
 		}
 		return false;
 	}
+	/**
+	 * returns $key-value from registry
+	 * 
+	 * @param	string	$key
+	 */
 	public function __get($key)
 	{
 		if(array_key_exists($key, self::$vars))
@@ -38,8 +50,6 @@ class Registry extends \a_Singleton
 	
 	/**
 	 * just pre-load some necessaray or often used *.ini files
-	 *
-	 * @return	void
 	 */
 	private function loadStandardConfigs()
 	{

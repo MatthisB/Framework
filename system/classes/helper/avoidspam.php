@@ -30,6 +30,14 @@ class AvoidSpam
 		$blockIP	= '',
 		$blockSecs	= '';
 
+	/**
+	 * define the settings
+	 * 
+	 * @param	string	$blockTime
+	 * @param	string	$type
+	 * @param	string	$typeID
+	 * @param	string	$ip
+	 */
 	public function __construct($blockTime, $type, $typeID = '', $ip = NULL)
 	{
 		$this->blockTime	= \Filter::mySQL_RealEscapeString($blockTime);
@@ -42,6 +50,10 @@ class AvoidSpam
 
 		$this->DeleteOldEntries();
 	}
+	/**
+	 * returns the hits -
+	 * - if there is no entry that fits, returns false
+	 */
 	public function CheckHits()
 	{
 		$sql  = new \mySQL\Select();
@@ -56,6 +68,10 @@ class AvoidSpam
 
 		return false;
 	}
+	/**
+	 * insert a new entry into mysql table
+	 * on duplicate key update hits++
+	 */
 	public function Insert()
 	{
 		$query	= 'INSERT INTO
@@ -68,12 +84,18 @@ class AvoidSpam
 		$sql	= new \mySQL\Query();
 		$sql   -> sqlQuery($query);
 	}
+	/**
+	 * delete entry
+	 */
 	public function Delete()
 	{
 		$sql  = new \mySQL\Query();
 		$sql -> Delete(PREFIX.'avoidspam', 'type = "'.$this->type.'" AND typeID = "'.$this->typeID.'" AND userIP = "'.$this->blockIP.'"');
 	}
 
+	/**
+	 * delete expired entries
+	 */
 	private function DeleteOldEntries()
 	{
 		$sql  = new \mySQL\Query();

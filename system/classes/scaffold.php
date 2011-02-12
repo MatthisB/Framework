@@ -13,6 +13,13 @@ class Scaffold
 		$route	= '',
 		$outlaw	= false;
 		
+	/**
+	 * reads out the route of URL
+	 * - then compare the route with outlaws and exceptions from routes.ini
+	 * 
+	 * @param	string	$controller
+	 * @param	string	$action
+	 */
 	public function __construct($controller, $action)
 	{
 		$this->route	= $controller.'::'.$action;
@@ -41,6 +48,9 @@ class Scaffold
 			}
 		}
 	}
+	/**
+	 * check if route is outlaw
+	 */
 	public function isOutlaw()
 	{
 		if($this->outlaw !== false)
@@ -49,6 +59,9 @@ class Scaffold
 		}
 		return false;
 	}
+	/**
+	 * run the outlaw route -> includes the called file from ./outlaws/
+	 */
 	public function runOutlaw()
 	{
 		if(substr($this->outlaw, 0, 6) != 'admin_')
@@ -71,6 +84,9 @@ class Scaffold
 		$this->Error('404');
 		return false;
 	}
+	/**
+	 * runs route, reads out meta tags and inserts all into the index template
+	 */
 	public function runRoute()
 	{
 		try
@@ -142,6 +158,15 @@ class Scaffold
 		}
 	}
 
+	/**
+	 * replaces {CONTROLLER} with $controller and {ACTION} with $action
+	 * - so you can use variables in routes.ini
+	 * 
+	 * @param	string	$str
+	 * @param	string	$controller
+	 * @param	string	$action
+	 * @return	string
+	 */
 	private function replaceVars($str, $controller, $action)
 	{
 		$search		= array('{CONTROLLER}', '{ACTION}');
@@ -150,6 +175,11 @@ class Scaffold
 		
 		return $str;
 	}
+	/**
+	 * if route doesn't exists, this function will print the error page
+	 * 
+	 * @param	string	$type
+	 */
 	private function Error($type = '404')
 	{
 		$errorName	 = 'Error'.$type;

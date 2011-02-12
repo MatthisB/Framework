@@ -5,11 +5,14 @@
   *
   */
 
-
+// global ajaxChat constants
 AJAX_CHAT_INSTANCES		= [];
 UPDATE_TICK_SPEED		= 5 * 1000;		// milliseconds
 USERLIST_TICK_SPEED		= 15 * 1000;	// milliseconds
 
+/**
+ * open or close all chatrooms set user status to online / offline
+ */
 function toggleAllChats()
 {
 	var span		= $('ajaxChat_changeStatus').childNodes[0];
@@ -48,7 +51,9 @@ function toggleAllChats()
 	}
 }
 
-// für den schnelleren Zugriff auf die verschiedenen Container
+/**
+ * to obtain a faster access to the most important chat container
+ */
 function returnAjaxChatElements(argChatID)
 {
 	argChatID							= intval(argChatID);
@@ -67,6 +72,12 @@ function returnAjaxChatElements(argChatID)
 	return chatElements;
 }
 
+/**
+ * to create a singleton instance of the ajaxChat-class
+ * 
+ * @param	int		argChatID
+ * @return	obj		ajaxChat
+ */
 function returnAjaxChatInstance(argChatID)
 {
 	if(!array_key_exists(argChatID, AJAX_CHAT_INSTANCES))
@@ -76,6 +87,7 @@ function returnAjaxChatInstance(argChatID)
 	
 	return AJAX_CHAT_INSTANCES[argChatID];
 }
+
 
 var ajaxChat = function(argChatID)
 {
@@ -88,6 +100,9 @@ var ajaxChat = function(argChatID)
 	
 	var message_BG_color	= 0;
 	
+	/**
+	 * decides what happens by clicking on the chat headline ( open or close chat )
+	 */
 	this.toggleChat = function()
 	{
 		if(chatObjects.tr.arrow.alt == 'Close')
@@ -105,11 +120,16 @@ var ajaxChat = function(argChatID)
 			chatObjects.tr.arrow.alt	= 'Close';
 			chatObjects.tr.arrow.src	= FRAMEWORK_CONFIG.SITEPATH + 'templates/chat_images/bullet_arrow_down.png';
 			
-			// erst laden nachdem der Slider fertig ist, damit alle Einträge korrekt angezeigt wird
+			// do not load until the slider is ready, to display entries correctly
 			var slider	= new Slider(chatObjects.chatWindow, {onComplete: this.openChat});
 			slider.down();
 		}
 	}
+	/**
+	 * insert /to userID into chat field
+	 * 
+	 * @param	int		userID
+	 */
 	this.toUser = function(userID)
 	{
 		if(!is_int(userID))
@@ -120,6 +140,9 @@ var ajaxChat = function(argChatID)
 		chatObjects.chatWindow.InputField.value	= '/to ' + userID + ' ';
 		chatObjects.chatWindow.InputField.focus();
 	}
+	/**
+	 * sets update intervals
+	 */
 	this.openChat = function()
 	{
 		updateContent();
@@ -129,6 +152,9 @@ var ajaxChat = function(argChatID)
 		userListInterval	= setInterval(updateUserList, USERLIST_TICK_SPEED);
 	}
 	
+	/**
+	 * delete update intervals and delete from activity in this room
+	 */
 	var closeChat = function()
 	{	
 		if(updateInterval != null)
@@ -142,6 +168,9 @@ var ajaxChat = function(argChatID)
 
 		var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/closeChat/'+argChatID+'/', 'GET', function(){}, '');
 	}
+	/**
+	 * first call the update url, then parse the xml response and insert into chat window
+	 */
 	var updateContent = function()
 	{
 		if(arguments.length == 2)
@@ -184,13 +213,13 @@ var ajaxChat = function(argChatID)
 				++message_BG_color;
 			}
 			
-			// immer zum neuesten eintrag scrollen, falls der User nicht nach oben gescrollt hat und es neue Einträge gibt
+			// scroll down to the newest entry if user had not scrolled to another position
 			if(scrollToBottom && newEntries.length >= 1)
 			{
 				p.scrollIntoView();
 			}
 			
-			// für die "schnellere aktualisierung" der user aktivitäten, aber nur wenn die user liste nicht sowieso gerade erst geladen wurde
+			// for a faster update of user-activity-list, but not if list has loaded a few seconds before
 			var userListLength		= (lastUpdate !== null ? chatObjects.chatWindow.userList.getElementsByTagName('li').length : 0);
 			for(var i = 0; i < userListLength; i++)
 			{
@@ -213,6 +242,9 @@ var ajaxChat = function(argChatID)
 			var ajaxReq	= new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/update/'+argChatID+'/'+lastUpdate+'/', 'GET', updateContent, '');
 		}
 	}
+	/**
+	 * call user update url and then insert the user list into the chatwindow
+	 */
 	var updateUserList = function()
 	{
 		if(arguments.length == 2)
@@ -224,21 +256,27 @@ var ajaxChat = function(argChatID)
 			var ajaxReq = new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/userList/'+argChatID+'/', 'GET', updateUserList, '');
 		}
 	}
+	/**
+	 * called on keypress, if pressed key == enter send message
+	 */
 	var sendMessage = function(e)
 	{		
-		// sollte in allen gängigen Browsern funktionieren; IE, FF etc.
+		// to work in all common browsers; IE, FF etc.
 		if(window.event)
 		{
 			e = window.event;
 		}
 
-		// 13 == Enter Taste
+		// 13 == enter key -> submit entry
 		if(e.keyCode == 13)
 		{
 			var params	= 'message=' + chatObjects.chatWindow.InputField.value;
 			var ajaxReq	= new AjaxRequest(FRAMEWORK_CONFIG.SITEPATH + 'ajax/chat/insertMessage/'+argChatID+'/', 'POST', sendMessageResult, params);
 		}
 	}
+	/**
+	 * receive result of insert message, if an error occured alert it
+	 */
 	var sendMessageResult = function(html, xml)
 	{
 		if(typeof html == 'undefined' || html == '')
@@ -252,5 +290,6 @@ var ajaxChat = function(argChatID)
 	}
 	
 	
+	// to call sendMessage() if user is writing
 	chatObjects.chatWindow.InputField.onkeypress	= sendMessage;
 }

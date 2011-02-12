@@ -30,6 +30,13 @@ class StarRating
 		$multiRating	= NULL,
 		$currentlyRated	= false;
 		
+	/**
+	 * initialise the rating class and define the settings
+	 * 
+	 * @param	string	$type
+	 * @param	string	$typeID
+	 * @param	int		$stars
+	 */
 	public function __construct($type, $typeID, $stars = 5)
 	{
 		$this->type		= \Filter::systemID($type);
@@ -40,14 +47,26 @@ class StarRating
 		$this->multiRating	= new \Helper\AvoidSpam('1 DAY', $this->type, $this->typeID);
 		$this->rated		= $this->multiRating -> CheckHits();
 	}
+	/**
+	 * print the outputs
+	 */
 	public function printRating()
 	{
 		echo $this->generateStars();
 	}
+	/**
+	 * return the outputs
+	 */
 	public function returnRating()
 	{
 		return $this->generateStars();
 	}
+	/**
+	 * insert new entry or update if already exists
+	 * 
+	 * @param	int		$value
+	 * @return	bool
+	 */
 	public function runRate($value)
 	{
 		$value	= \Filter::Int($value);
@@ -77,6 +96,12 @@ class StarRating
 		return true;
 	}		
 	
+	/**
+	 * generates the html output 
+	 * - if user hasn't rated yet, insert also hover-javascript
+	 * 
+	 * @return string
+	 */
 	private function generateStars()
 	{
 		ob_start();

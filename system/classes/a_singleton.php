@@ -12,6 +12,11 @@ abstract class a_Singleton
 	private static
 		$instances = array();
 
+	/**
+	 * creates the instance of the called class
+	 * - but normally you shouldnt use this function!
+	 * -> just call \Class::Instance();
+	 */
 	final public static function createInstance()
 	{
 		$args  = func_get_args();
@@ -19,7 +24,7 @@ abstract class a_Singleton
 
 		if($class == null)
 		{
-			throw new Exception_FatalError('Keine Klasse zum initialisieren!');
+			throw new \Exception\FatalError('Keine Klasse zum initialisieren!');
 		}
 
 		if(!array_key_exists($class, self::$instances))
@@ -43,6 +48,10 @@ abstract class a_Singleton
 		}
 		return self::$instances[$class];
 	}
+	/**
+	 * returns the instance of the called class
+	 * - if there isnt an instance yet, create it
+	 */
 	public static function Instance()
 	{
 		try
@@ -53,11 +62,14 @@ abstract class a_Singleton
 
 			return $return;
 		}
-		catch(Exception_FatalError $exception)
+		catch(\Exception\FatalError $exception)
 		{
 			echo $exception->getMessage();
 		}
 	}
+	/**
+	 * This class should not be cloned!
+	 */
 	final public function __clone()
 	{
 		trigger_error('This singleton must not be cloned.', E_USER_ERROR);

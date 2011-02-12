@@ -14,7 +14,14 @@ class Cache
 		$_lifetime	= 0,
 		$_cacheFile	= '';
 
-	# lifetime in sec
+	/**
+	 * initialise the cache class
+	 * - filename should be unique
+	 * - lifetime in seconds
+	 * 
+	 * @param	string	$filename
+	 * @param	int		$lifetime
+	 */
 	public function __construct($filename, $lifetime)
 	{
 		$this->_lifetime = Filter::Int($lifetime);
@@ -33,20 +40,34 @@ class Cache
 			$this->deleteCache();
 		}
 	}
+	/**
+	 * checks if cache-file exists
+	 */
 	public function existCache()
 	{
 		return is_readable($this->_filename);
 	}
+	/**
+	 * prints the cache content
+	 */
 	public function printCache()
 	{
 		$this->loadCache();
 		echo $this->_cacheFile;
 	}
+	/**
+	 * returns the cache content
+	 */
 	public function returnCache()
 	{
 		$this->loadCache();
 		return $this->_cacheFile;
 	}
+	/**
+	 * creates the cache-file and write content into it
+	 * 
+	 * @param	mixed	$content
+	 */
 	public function createCache($content)
 	{
 		$this->_cacheFile = $content;
@@ -56,6 +77,9 @@ class Cache
 		}
 		return false;
 	}
+	/**
+	 * deletes the cache-file
+	 */
 	public function deleteCache()
 	{
 		if(unlink($this->_filename))
@@ -66,6 +90,9 @@ class Cache
 		return false;
 	}
 
+	/**
+	 * returns the content of cache-file
+	 */
 	private function loadCache()
 	{
 		if(!empty($this->_cacheFile))

@@ -17,6 +17,7 @@ class CSS
 		$fileCache		= NULL,
 		$fileContent	= '';
 		
+	
 	public function __construct($cssFile, $cacheLifetime = 3600)
 	{
 		if(!preg_match('/'.preg_quote(ROOT, '/').'.*?/i', $cssFile))

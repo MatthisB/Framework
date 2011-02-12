@@ -11,6 +11,9 @@ namespace Email;
 
 class Html extends \Email\a_Email
 {
+	/**
+	 * just set the html-header and transmit the html-mail
+	 */
 	public function sendEmail()
 	{
 		$this->checkReceiver();

@@ -20,8 +20,13 @@ class iniHandler
 		$iniFile	= '',
 		$iniArray	= array();
 
-	/*
-	 * mode; 0 = read only, 1 = override / create
+	/**
+	 * initialise the Handler class
+	 * - mode; 0 = read only, 1 = override / create
+	 * 
+	 * @param	string	$iniFile
+	 * @param	int		$mode
+	 * @param	string	$iniDir
 	 */
 	public function __construct($iniFile, $mode = 1, $iniDir = 'system/files/inis/')
 	{
@@ -38,10 +43,22 @@ class iniHandler
 			echo $exception->getMessage();
 		}
 	}
+	/**
+	 * magic function for comfortable isset query
+	 * 
+	 * @param	mixed	$key
+	 * @return	mixed
+	 */
 	public function __isset($key)
 	{
 		return array_key_exists($key, $this->iniArray);
 	}
+	/**
+	 * returns $key-value from iniFile
+	 * 
+	 * @param	mixed	$key
+	 * @return	mixed
+	 */
 	public function __get($key)
 	{
 		if(array_key_exists($key, $this->iniArray))
@@ -50,6 +67,13 @@ class iniHandler
 		}
 		return NULL;
 	}
+	/**
+	 * sets $value for $key in iniFile
+	 * 
+	 * @param	mixed	$key
+	 * @param	mixed	$value
+	 * @return	bool
+	 */
 	public function __set($key, $value)
 	{
 		if(!array_key_exists($key, $this->iniArray) || !$this->mode !== 0)
@@ -59,10 +83,20 @@ class iniHandler
 		}
 		return false;
 	}
+	/**
+	 * returns the whole iniArray
+	 * 
+	 * @return	array
+	 */
 	public function getArray()
 	{
 		return $this->iniArray;
 	}
+	/**
+	 * save updates to ini file
+	 * 
+	 * @retun	bool
+	 */
 	public function updateFile()
 	{
 		try
@@ -76,6 +110,9 @@ class iniHandler
 		}
 	}
 
+	/**
+	 * loads and parses iniFile
+	 */
 	private function loadFile()
 	{
 		$this->iniFile	= strtolower($this->iniFile);
@@ -89,6 +126,11 @@ class iniHandler
 		}
 		$this->iniArray = parse_ini_file($this->iniFile, true);
 	}
+	/**
+	 * saves changes to iniFile
+	 * 
+	 * @return	bool
+	 */
 	private function saveFile()
 	{
 		try

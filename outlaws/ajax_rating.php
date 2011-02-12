@@ -7,6 +7,8 @@
   *
   */
 
+# check for errors - if there arent any errors execute StarRating class
+
 try
 {
 	if(isEmpty('rate', 1) || $_POST['rate'] != 'true')
@@ -30,7 +32,7 @@ try
 		throw new \Exception\FormError('No or wrong value given!');
 	}
 
-	$rating  = new StarRating($_POST['type'], $_POST['typeID'], $_POST['stars']);
+	$rating  = new \StarRating($_POST['type'], $_POST['typeID'], $_POST['stars']);
 	
 	if($rating -> runRate($_POST['value']) !== true)
 	{

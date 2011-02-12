@@ -14,6 +14,10 @@ class Scope extends \a_Singleton
 	private
 		$firstVisit	= false;
 	
+	/**
+	 * initalises the Session-Scope
+	 * - if _scope doesnt exists in $_SESSION create it
+	 */
 	protected function __construct()
 	{
 		if(!array_key_exists('_scope', $_SESSION))
@@ -42,6 +46,12 @@ class Scope extends \a_Singleton
 		$_SESSION['_scope'][$key] = $value;
 		return true;
 	}
+	/**
+	 * returns the called $key from Session-Scope
+	 * - if $key doesnt exists, retun NULL
+	 * 
+	 * @param	string	$key
+	 */
 	public function __get($key)
 	{
 		if(array_key_exists($key, $_SESSION['_scope']))
@@ -55,6 +65,11 @@ class Scope extends \a_Singleton
 		}
 		return NULL;
 	}
+	/**
+	 * deletes $key from Session(-Scope)
+	 * 
+	 * @param	string	$key
+	 */
 	public function __unset($key)
 	{
 		if(array_key_exists($key, $_SESSION['_scope']))
@@ -64,18 +79,35 @@ class Scope extends \a_Singleton
 		}
 		return false;
 	}
+	/**
+	 * magic function, so you can simply use isset()
+	 * 
+	 * @param	string	$key
+	 */
 	public function __isset($key)
 	{
 		return array_key_exists($key, $_SESSION['_scope']);
 	}
+	/**
+	 * if is first visit on page returns true
+	 * 
+	 * @return	bool
+	 */
 	public function isFirstVisit()
 	{
 		return $this->firstVisit;
 	}
+	/**
+	 * returns the whole SessionScope array
+	 */
 	public function getAll()
 	{
 		return $_SESSION['_scope'];
 	}
+	/**
+	 * be careful with this function!
+	 * it deletes all Session-Scope variables from session
+	 */
 	public function destroyScope()
 	{
 		$_SESSION['_scope'] = array();

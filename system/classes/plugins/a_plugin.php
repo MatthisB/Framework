@@ -14,6 +14,12 @@ class a_Plugin
 	protected
 		$_content	= '';
 
+	/**
+	 * quick access to template-class
+	 * 
+	 * @param	string	$templateName
+	 * @return	obj
+	 */
 	protected function __loadTemplate($templateName = '')
 	{
 		$namespace		= get_called_class();
@@ -23,6 +29,13 @@ class a_Plugin
 
 		return new \Template\HTML($templateName, $namespace);
 	}
+	/**
+	 * quick access to cached-template-class
+	 * 
+	 * @param	string	$templateName
+	 * @param	int		$lifetime
+	 * @return	obj
+	 */
 	protected function __loadTemplateCached($templateName = '', $lifetime = 3600)
 	{
 		$namespace		= get_called_class();

@@ -11,6 +11,13 @@ namespace Module\User;
 
 class m_Register extends \MVC\a_Model implements \MVC\i_Model
 {
+	/**
+	 * insert a new user into database - after that call function m_user::setPassword()
+	 * 
+	 * @param	string	$nickName
+	 * @param	string	$eMail
+	 * @return	int		userID
+	 */
 	public function insertUser($nickName, $eMail)
 	{
 		$nickName = \Filter::mySQL_RealEscapeString($nickName);
@@ -24,6 +31,12 @@ class m_Register extends \MVC\a_Model implements \MVC\i_Model
 		
 		return $query -> getInsertID();
 	}
+	/**
+	 * returns object with all for activation necessary data
+	 * 
+	 * @param	int		$userID
+	 * @return	object	activation-data
+	 */
 	public function getActivationObj($userID)
 	{
 		$userID = \Filter::Int($userID);
@@ -40,6 +53,12 @@ class m_Register extends \MVC\a_Model implements \MVC\i_Model
 			
 		return $query -> FetchObj();
 	}
+	/**
+	 * activate the user with id = $userID
+	 * 
+	 * @param	int		$userID
+	 * @return	bool
+	 */
 	public function activateUser($userID)
 	{
 		$userID = \Filter::Int($userID);

@@ -23,6 +23,13 @@ class Image
 		
 		$value		= 'ERROR';
 	
+	/**
+	 * initialise the captcha image
+	 * 
+	 * @param	string	$value
+	 * @param	int		$width
+	 * @param	int		$height
+	 */
 	public function __construct($value, $width, $height)
 	{
 		if(!\isValid::string($value))
@@ -40,6 +47,11 @@ class Image
 		
 		$this->setFont('Alanden_.ttf');
 	}
+	/**
+	 * sets the font for the text
+	 * 
+	 * @param	string	$fontFile
+	 */
 	public function setFont($fontFile)
 	{
 		if(!is_readable(ROOT.'system/files/fonts/'.$fontFile))
@@ -49,6 +61,11 @@ class Image
 		
 		$this->fontFile = ROOT.'system/files/fonts/'.$fontFile;
 	}
+	/**
+	 * sets the font size for the text
+	 * 
+	 * @param	int		$fontSize
+	 */
 	public function setFontSize($fontSize)
 	{
 		if(!\isValid::Numeric($fontSize))
@@ -58,6 +75,11 @@ class Image
 		
 		$this->fontSize = (int) $fontSize;
 	}
+	/**
+	 * if you want a border set $border = true
+	 * 
+	 * @param	bool	$border
+	 */
 	public function setBorder($border)
 	{
 		if($border == true)
@@ -65,6 +87,11 @@ class Image
 			$this->border = true;
 		}
 	}
+	/**
+	 * if you want some hacker-irritating lines on the image
+	 *
+	 * @param	bool	$lines
+	 */
 	public function setLines($lines)
 	{
 		if($lines == true)
@@ -72,6 +99,9 @@ class Image
 			$this->lines = true;
 		}
 	}
+	/**
+	 * finally, create the captcha image
+	 */
 	public function createCaptcha()
 	{
 		$this->img	= imagecreatetruecolor($this->width, $this->height);
@@ -104,6 +134,11 @@ class Image
 		imagedestroy($this->img);
 	}
 	
+	/**
+	 * returns some prefabricated colors
+	 * 
+	 * @param	string	$style
+	 */
 	private function generateColor($style = 'random')
 	{
 		switch(strtolower($style))
@@ -147,6 +182,9 @@ class Image
 		
 		return imagecolorallocate($this->img, $r, $g, $b);
 	}
+	/**
+	 * creates the border around the image
+	 */
 	private function createBorder()
 	{
 		$x = $this->width;
@@ -164,6 +202,9 @@ class Image
 		imageline($this->img,    0,    0,    0, $y-1, $color);
 		imageline($this->img, $x-1,    0, $x-1, $y-1, $color);
 	}
+	/**
+	 * creates the lines through the image
+	 */
 	private function createLines()
 	{
 		if($this->lines == true)

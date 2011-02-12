@@ -6,6 +6,8 @@
  *
  */
 
+# TODO: suche new ([a-zA-Z]) - und ersetze mit new \$1
+
 define('ROOT', 			realpath(dirname(__FILE__)).'/');	# Root Ordner
 define('DEVELOPMENT',	true);								# Fehlerbehandlung
 
@@ -60,7 +62,7 @@ define('TEMPLATE_DIR', ROOT.'templates/'.\Registry::Instance() -> templateConfig
 
 
 /**
- * Bestimmt was mit Fehlern angestellt wird
+ * decides what should happens with errors
  * @return	void
  */
 function ErrorReporting()
@@ -79,7 +81,7 @@ function ErrorReporting()
 }
 
 /**
- * Klassen automatisch bei Benutzung laden
+ * load classes automatically
  *
  * @param	string	$className
  * @return	void
@@ -109,10 +111,10 @@ function __autoload($className)
 }
 
 /**
- * Generiert die Datei Namen der Klassen die über __autoload() aufgerufen werden
+ * generates the filenames for __autoload()
  *
  * @param	string	$className
- * @return	string	$file		Pfad zur Klassen-Datei
+ * @return	string	$file		path to class-file
  */
 function classFileName($className)
 {
@@ -140,8 +142,8 @@ function classFileName($className)
 }
 
 /**
- * Hilfsfunktion, um globale Variablen ( $_GET, $_POST ... ) auf existenz und Inhalt zu testen
- * Vorsicht; falls nicht gesetzt / leer liefert die funktion true - evtl. ab und zu etwas verwirrend
+ * a little help-function to test global variables ( $_GET, $_POST ... ) - means: do they exist, are they empty, ...
+ * be careful: if var doesn't exist or is empty, the function returns true
  * 	0 = GET, 1 = POST, 2 = REQUEST, 3 = SESSION, 4 = COOKIE
  *
  * @param	mixed	$var
@@ -169,7 +171,7 @@ function isEmpty($var, $request = 0)
 }
 
 /**
- * varDump - mit <pre>
+ * var_dump - with <pre> tag
  *
  * @param	mixed
  */

@@ -11,14 +11,19 @@ class LoginLogout
 {
 	private
 		$template	= NULL;
-		
-	public function __construct()
+	
+	/**
+	 * initialise the class and set $action ( login / logout )
+	 * 
+	 * @param	string	$action
+	 */
+	public function __construct($action)
 	{
 		$this->template	= new \Template\HTML('login.html', TEMPLATE_DIR);
 		
 		try
 		{
-			if(\Helper\URL::Instance()->_class == 'login')
+			if($action == 'login')
 			{
 				$this->runLogin();
 			}
@@ -35,6 +40,10 @@ class LoginLogout
 		}
 	}
 	
+	/**
+	 * execute the login
+	 * if nickname and password are correct set session variables, cookies etc., otherwise display error
+	 */
 	private function runLogin()
 	{
 		if(LOGGEDIN)
@@ -94,6 +103,9 @@ class LoginLogout
 			throw new \Exception\NormalError('That was your '.$logFails -> CheckHits().'/'.\Registry::Instance() -> frameworkConfig -> login['maxFails'].' try!', array('showForm' => true));
 		}	
 	}
+	/**
+	 * execute the logout - means delete cookies etc, then print the logout message
+	 */
 	private function runLogout()
 	{
 		if(!LOGGEDIN)
@@ -118,4 +130,7 @@ class LoginLogout
 	}
 }
 
-$LoginLogout	= new \LoginLogout();
+# call the login / logout action
+$action			 = \Helper\URL::Instance()->_class;
+$LoginLogout	 = new \LoginLogout($action);
+

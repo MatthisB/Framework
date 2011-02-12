@@ -45,6 +45,13 @@ class m_User extends \MVC\a_Model implements \MVC\i_Model
 	{
 		
 	}
+	/**
+	 * set the password ( $password ) for user ( $userID )
+	 * 
+	 * @param	int		$userID
+	 * @param	string	$password
+	 * @return	bool
+	 */
 	public function setPassword($userID, $password)
 	{
 		$userID  = \Filter::mySQL_RealEscapeString($userID);
@@ -59,20 +66,39 @@ class m_User extends \MVC\a_Model implements \MVC\i_Model
 		if($query -> AffectedRows() !== 1)
 		{
 			trigger_error('Something went wrong during updating the password!', E_USER_ERROR);
+			return false;
 		}
+		return true;
 	}
-	
+	/**
+	 * checks if nick is already in use
+	 * 
+	 * @param	string	$nick
+	 * @return	bool
+	 */
 	public function nickAlreadyInUse($nick)
 	{
 		$nick	= \Filter::mySQL_RealEscapeString($nick);
 		return $this->xAlreadyInUse('nickname = "'.$nick.'"');
 	}
+	/**
+	 * checks if email adress is already in use
+	 * 
+	 * @param	string	$email
+	 * @return	bool
+	 */
 	public function emailAlreadyInUse($email)
 	{
 		$email	= \Filter::mySQL_RealEscapeString($email);
 		return $this->xAlreadyInUse('email = "'.$email.'"');
 	}
 	
+	/**
+	 * wrapper for {$x}AlreadyInUse
+	 * 
+	 * @param	string	$where
+	 * @return	bool
+	 */
 	private function xAlreadyInUse($where)
 	{
 		$query	 = new \mySQL\Select();

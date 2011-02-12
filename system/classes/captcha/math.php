@@ -15,7 +15,14 @@ class Math extends \Captcha\Controller
 		$imgClass	= '',
 		$imgWidth	= 0,
 		$imgHeight	= 0;
-		
+	
+	/**
+	 * initialise the standard-captcha module; a simple math task
+	 * 
+	 * @param	int		$imgWidth
+	 * @param	int		$imgHeight
+	 * @param	string	$imgClass
+	 */
 	public function __construct($imgWidth, $imgHeight, $imgClass = '')
 	{
 		$id	= parent::generateID();
@@ -29,6 +36,12 @@ class Math extends \Captcha\Controller
 		$this->imgWidth		= $imgWidth;
 		$this->imgHeight	= $imgHeight;
 	}
+	/**
+	 * set the session vars to create the captcha with the given args
+	 * 	$max = highest digit - regulates the difficult
+	 * 
+	 * @param	int		$max
+	 */
 	public function createSession($max = 9)
 	{
 		if(!\isValid::Numeric($max))
@@ -45,6 +58,9 @@ class Math extends \Captcha\Controller
 											'result'	=> $var1 + $var2,
 											'imgClass'	=> $this->imgClass);
 	}
+	/**
+	 * just returns the generated ID
+	 */
 	public function getID()
 	{
 		return $this->ID;

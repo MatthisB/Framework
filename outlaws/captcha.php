@@ -9,6 +9,8 @@
 
 \Registry::Instance()->Header->addHeader('Content-Type', 'image/png');
 
+# check for errors, otherwise display captcha
+
 try
 {	
 	if(\Helper\URL::Instance()->_method == 'NULL')

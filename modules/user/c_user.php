@@ -11,11 +11,17 @@ namespace Module\User;
 
 class c_User extends \MVC\a_Controller implements \MVC\i_Controller
 {
+	/**
+	 * TODO: maybe own user profile?
+	 */
 	public function Index()
 	{
 		\Helper\Message::Notice('Something went wrong ... maybe you followed a broken link ...');
 		echo \Helper\HTML::redirectJS(\Helper\URL::$_SITEPATH, 3);
 	}
+	/**
+	 * resend the activation mail to user
+	 */
 	public function resendactivationmail()
 	{
 		$this->_siteTitle = 'User Activation';
@@ -55,6 +61,9 @@ class c_User extends \MVC\a_Controller implements \MVC\i_Controller
 			echo $error -> getErrorMessage();
 		}
 	}
+	/*
+	 * activate the user account if security hash is correct
+	 */
 	public function activation()
 	{
 		$this->_siteTitle = 'User Activation';
@@ -91,6 +100,9 @@ class c_User extends \MVC\a_Controller implements \MVC\i_Controller
 			echo $error -> getErrorMessage();
 		}
 	}
+	/**
+	 * register a new user
+	 */
 	public function register()
 	{
 		$this->_siteTitle = 'Registration Form';

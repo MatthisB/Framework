@@ -5,6 +5,9 @@
   *
   */
 
+/**
+ * a short form for document.getElementById, also for multiple elements
+ */
 function $()
 {
 	var countArguments	= arguments.length;
@@ -29,9 +32,14 @@ function $()
 	return returnElements;
 }
 
+/**
+ * javascript counterpart to the php function in_array
+ */
 Array.prototype.contains = function(element)
 {
-	for(var i = 0; i < this.length; ++i)
+	var length = this.length;
+	
+	for(var i = 0; i < length; ++i)
 	{
 		if(this[i] == element)
 		{
@@ -41,6 +49,11 @@ Array.prototype.contains = function(element)
 	return false;
 }
 
+/**
+ * convert mixedVar to int
+ * 
+ * @param	mixed	mixedVar
+ */
 function intval(mixedVar)
 {
 	var type = typeof(mixedVar);
@@ -57,6 +70,13 @@ function intval(mixedVar)
 	return 0;
 }
 
+/**
+ * checks if key exists in search-array
+ * 
+ * @param	mixed	key
+ * @param	array	search
+ * @return	bool
+ */
 function array_key_exists(key, search)
 {
 	if(!search || (search.constructor !== Array && search.constructor !== Object))
@@ -67,16 +87,12 @@ function array_key_exists(key, search)
 	return key in search;
 }
 
-function checkBrowser(name)
-{
-	if(navigator.userAgent.toLowerCase().indexOf(name.toLowerCase()) > -1 )
-	{
-		return true;
-	}
-	
-	return false;
-}
-
+/**
+ * checks if i is int
+ * 
+ * @param	mixed	i
+ * @return	bool
+ */
 function is_int(i)
 {
 	if(typeof i !== 'number')
@@ -87,6 +103,12 @@ function is_int(i)
 	return !(i % 1);
 }
 
+/**
+ * ask message ( msg ) if true change page to page, otherwise do nothing
+ *
+ * @param	string	msg
+ * @param	string	page
+ */
 function DoConfirm(msg, page)
 {
 	var pop = confirm(msg);
@@ -96,11 +118,20 @@ function DoConfirm(msg, page)
 	}
 }
 
+/**
+ * change page to site
+ * 
+ * @param	string	site
+ */
 function changePage(site)
 {
 	self.location = site;
 }
 
+/**
+ * reload the captcha, e.g. if isn't legibly
+ * @param	int		id
+ */
 function reloadCaptcha(id)
 {
 	var rand	= Math.floor(Math.random()*1000);
@@ -108,6 +139,12 @@ function reloadCaptcha(id)
 	document.getElementById('captcha_' + id).src	= FRAMEWORK_CONFIG.SITEPATH + 'captcha/'+id+'/image.png';
 }
 
+/**
+ * call the slider and change link classname
+ * 
+ * @param	string	argID
+ * @param	mixed	argOptions
+ */
 function Toggle(argID, argOptions)
 {
 	if(typeof argOptions == 'undefined')

@@ -9,6 +9,8 @@
 
 namespace Module\News;
 
+# news script is in work
+
 class c_News extends \MVC\a_Controller implements \MVC\i_Controller
 {
 	public function getTitle()
@@ -22,16 +24,14 @@ class c_News extends \MVC\a_Controller implements \MVC\i_Controller
 
 	public function Index()
 	{
-		echo __METHOD__.' aufgerufen';
+		echo __METHOD__.' called';
 
 		$this->_siteTitle = 'News';
-		#$this->__loadModel('test');
-		#$this->__loadView('test');
 	}
 	public function ReadOne()
 	{
-		echo __METHOD__.' aufgerufen';
+		echo __METHOD__.' called';
 
-		$this->_siteTitle = 'News | lese news ... ';
+		$this->_siteTitle = 'News | read news ... ';
 	}
 }

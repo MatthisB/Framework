@@ -18,6 +18,9 @@ abstract class a_Email
 	
 		$header			= array(); 		
 				
+	/**
+	 * add receiver - also multiple possible
+	 */
 	public function addReceiver()
 	{
 		foreach(func_get_args() as $value)
@@ -28,6 +31,9 @@ abstract class a_Email
 			}
 		}
 	}
+	/**
+	 * add a carbon copy - also multiple possible
+	 */
 	public function addCarbonCopy()
 	{
 		if(!array_key_exists('Cc', $this->header))
@@ -42,6 +48,9 @@ abstract class a_Email
 			}
 		}
 	}
+	/**
+	 * add blind carbon copy - also multiple possible
+	 */
 	public function addBlindCarbonCopy()
 	{
 		if(!array_key_exists('Bcc', $this->header))
@@ -56,7 +65,11 @@ abstract class a_Email
 			}
 		}
 	}
-			
+	/**
+	 * set the subject of the mail
+	 * 
+	 * @param	string	$subject
+	 */
 	public function setSubject($subject)
 	{
 		if(!empty($subject))
@@ -68,18 +81,38 @@ abstract class a_Email
 			$this->subject = '=?utf-8?b?'.base64_encode($subject).'?=';
 		}
 	}
+	/**
+	 * sets the content of the mail
+	 * 
+	 * @param	string	$message
+	 */
 	public function setMessage($message)
 	{
 		$this->message = $message;
 	}
+	/**
+	 * set the sender mail adress - your email adress
+	 * 
+	 * @param	string	$from
+	 */
 	public function setSender($from)
 	{
 		$this->header['From'] = $from;
 	}
+	/**
+	 * set the replay adress
+	 * 
+	 * @param	string	$reply
+	 */
 	public function setReply($reply)
 	{
 		$this->header['Reply-To'] = $reply;
 	}
+	/**
+	 * set priority of mail - 1 highest, 5 lowest
+	 * 
+	 * @param	int		$priority
+	 */
 	public function setPriority($priority = 3)
 	{
 		switch($priority)
@@ -103,6 +136,9 @@ abstract class a_Email
 		$this->header['X-Priority']	= $priority;
 	}
 	
+	/**
+	 * check if there is at least one receiver
+	 */
 	protected function checkReceiver()
 	{
 		$this->receiver = trim($this->receiver, ',');
@@ -114,6 +150,9 @@ abstract class a_Email
 			trigger_error('You have to set at least one receiver!', E_USER_WARNING);
 		}
 	}
+	/**
+	 * transform header array to string
+	 */
 	protected function headerToString()
 	{
 		$header = '';
@@ -124,6 +163,15 @@ abstract class a_Email
 		}
 		return $header;
 	}
+	/**
+	 * the mail function itself - send the mail
+	 * 
+	 * @param	string	$to
+	 * @param	string	$subject
+	 * @param	string	$message
+	 * @param	array	$additional_headers
+	 * @return	bool
+	 */
 	protected function _mail($to, $subject, $message, $additional_headers = array())
 	{
 		if(!isset($this->header['From']) && isset(\Registry::Instance() -> frameworkConfig -> email['From']))

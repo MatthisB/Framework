@@ -39,6 +39,9 @@ class p_AjaxChat extends \Plugins\a_Plugin implements \Plugins\i_Plugin
 		return $this -> output;
 	}
 
+	/**
+	 * list chatrooms, if room user is active in room add javascript to init chatroom
+	 */
 	private function listRooms()
 	{
 		$sql		 = 'SELECT
@@ -94,6 +97,9 @@ class p_AjaxChat extends \Plugins\a_Plugin implements \Plugins\i_Plugin
 								 . "</script>\n";
 		}
 	}
+	/**
+	 * add the chatbar to output
+	 */
 	private function createChatBar()
 	{
 		if($this -> isOnline)
@@ -105,6 +111,12 @@ class p_AjaxChat extends \Plugins\a_Plugin implements \Plugins\i_Plugin
 			$this	 -> output	.= '<a id="ajaxChat_changeStatus" href="javascript:toggleAllChats();"><span class="ajaxChat_changeStatus_online">go online</span></a>';
 		}
 	}
+	/**
+	 * checks if user has opened chatroom with id $chatID
+	 * 
+	 * @param	int		$chatID
+	 * @return	bool
+	 */
 	private function isChatOpened($chatID)
 	{
 		$chatID		 = \Filter::Int($chatID);

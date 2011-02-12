@@ -14,6 +14,9 @@ class Attachment extends \Email\a_Email
 	private
 		$attachments	= array();
 	
+	/**
+	 * add multiple attachments
+	 */
 	public function addAttachment()
 	{
 		foreach(func_get_args() as $key => $value)
@@ -21,6 +24,9 @@ class Attachment extends \Email\a_Email
 			$this->attachments[] = $value;
 		}
 	}
+	/**
+	 * convert the attachments to string and prepare for transmit
+	 */
 	public function sendEmail()
 	{
 		$this->checkReceiver();
